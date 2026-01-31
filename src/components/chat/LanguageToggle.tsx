@@ -14,7 +14,7 @@ export function LanguageToggle({ language, onToggle, label }: LanguageToggleProp
       variant="ghost"
       size="sm"
       onClick={onToggle}
-      className="gap-2 text-muted-foreground hover:text-foreground"
+      className="gap-2 text-primary-foreground/80 hover:text-primary-foreground hover:bg-white/10"
     >
       <Globe className="w-4 h-4" />
       <span className="text-sm font-medium">{label}</span>

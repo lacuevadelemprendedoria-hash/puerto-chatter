@@ -3,9 +3,27 @@ export type Language = "en" | "es";
 export const translations = {
   en: {
     welcome: {
-      title: "Welcome to Puerto Nest!",
+      title: "Puerto Nest Assistant",
       subtitle: "Your virtual hostel assistant",
-      description: "Ask me anything about the hostel - check-in times, house rules, WiFi, and more!",
+      description: "Ask me anything about the hostel, WiFi, check-in, excursions and more",
+    },
+    actionCards: {
+      nestPass: {
+        title: "Nest Pass",
+        description: "Move between Nest Hostels at a special price",
+      },
+      hostelInfo: {
+        title: "Hostel Info & Bookings",
+        description: "Check-in, house rules, reservations",
+      },
+      excursions: {
+        title: "Excursions & Things to Do",
+        description: "Tours, beaches, activities",
+      },
+      transport: {
+        title: "Transport",
+        description: "Airports, buses, taxis",
+      },
     },
     chat: {
       placeholder: "Type your question...",
@@ -61,9 +79,27 @@ export const translations = {
   },
   es: {
     welcome: {
-      title: "¡Bienvenido a Puerto Nest!",
+      title: "Puerto Nest Assistant",
       subtitle: "Tu asistente virtual del hostel",
-      description: "Pregúntame sobre el hostel - horarios de check-in, reglas, WiFi y más!",
+      description: "Pregúntame sobre el hostel, WiFi, check-in, excursiones y más",
+    },
+    actionCards: {
+      nestPass: {
+        title: "Nest Pass",
+        description: "Viaja entre Nest Hostels a precio especial",
+      },
+      hostelInfo: {
+        title: "Info del Hostel",
+        description: "Check-in, reglas, reservas",
+      },
+      excursions: {
+        title: "Excursiones y Actividades",
+        description: "Tours, playas, actividades",
+      },
+      transport: {
+        title: "Transporte",
+        description: "Aeropuertos, buses, taxis",
+      },
     },
     chat: {
       placeholder: "Escribe tu pregunta...",
