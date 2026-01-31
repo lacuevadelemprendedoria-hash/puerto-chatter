@@ -1,4 +1,4 @@
-import { Building2 } from "lucide-react";
+import nestLogo from "@/assets/puerto-nest-logo.png";
 
 interface HeroSectionProps {
   title: string;
@@ -11,8 +11,12 @@ export function HeroSection({ title, subtitle, description }: HeroSectionProps) 
     <div className="bg-primary px-6 py-8 text-primary-foreground">
       <div className="flex flex-col items-center text-center max-w-md mx-auto">
         {/* Logo */}
-        <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center mb-4">
-          <Building2 className="w-8 h-8" />
+        <div className="w-20 h-20 rounded-full bg-white/20 flex items-center justify-center mb-4 overflow-hidden">
+          <img 
+            src={nestLogo} 
+            alt="Puerto Nest Logo" 
+            className="w-16 h-16 object-contain"
+          />
         </div>
         
         {/* Title */}
