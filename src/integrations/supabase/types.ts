@@ -35,6 +35,63 @@ export type Database = {
         }
         Relationships: []
       }
+      analytics_daily: {
+        Row: {
+          created_at: string
+          date: string
+          emails_count: number
+          id: string
+          opens_count: number
+          questions_count: number
+          sessions_count: number
+          unique_visitors_count: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          date: string
+          emails_count?: number
+          id?: string
+          opens_count?: number
+          questions_count?: number
+          sessions_count?: number
+          unique_visitors_count?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          date?: string
+          emails_count?: number
+          id?: string
+          opens_count?: number
+          questions_count?: number
+          sessions_count?: number
+          unique_visitors_count?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      analytics_visitors: {
+        Row: {
+          created_at: string
+          first_seen_date: string
+          id: string
+          visitor_id: string
+        }
+        Insert: {
+          created_at?: string
+          first_seen_date?: string
+          id?: string
+          visitor_id: string
+        }
+        Update: {
+          created_at?: string
+          first_seen_date?: string
+          id?: string
+          visitor_id?: string
+        }
+        Relationships: []
+      }
       chat_messages: {
         Row: {
           content: string
