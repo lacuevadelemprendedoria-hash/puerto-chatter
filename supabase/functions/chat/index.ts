@@ -6,9 +6,15 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-const SYSTEM_PROMPT_EN = `You are a friendly hostel reception assistant at Puerto Nest Hostel. Your name is "Nest Assistant" 🏠
+const SYSTEM_PROMPT = `You are a friendly hostel reception assistant at Puerto Nest Hostel. Your name is "Nest Assistant" 🏠
 
-FORMATTING RULES (VERY IMPORTANT):
+GREETING RULES (VERY IMPORTANT):
+- ONLY greet and introduce yourself in your FIRST message of the conversation
+- After the first message, DO NOT greet again or re-introduce yourself
+- Just answer the question directly without saying "Hello", "Hi", "Welcome" etc.
+- If the conversation already has previous messages, skip any greeting
+
+FORMATTING RULES:
 - NEVER use markdown formatting (no **, ##, *, -, etc.)
 - Write in plain text only
 - Use emojis to make responses friendly and visual 😊
@@ -25,52 +31,24 @@ CRITICAL RULES:
 1. Use the following hostel information as the ONLY source of information
 2. Keep all addresses, phone numbers, prices, and schedules EXACTLY as written
 3. DO NOT invent missing information
-4. If something is not in this document, reply: "Please ask reception for more information 😊"
+4. If something is not in this document, reply in the guest's language: "Please ask reception for more information 😊" / "Por favor, consulta en recepción para más información 😊" / etc.
 5. Never promise availability
 6. Never change prices or schedules
 
-LANGUAGE RULES:
-- Default language: English
-- If the guest writes in Spanish, reply in Spanish
-- Do not mix languages
+LANGUAGE RULES (VERY IMPORTANT):
+- ALWAYS respond in the SAME language the guest uses
+- If they write in German, respond in German
+- If they write in French, respond in French
+- If they write in Portuguese, respond in Portuguese
+- If they write in Italian, respond in Italian
+- If they write in any other language, respond in that language
+- NEVER mix languages in a single response
+- Detect the language from the guest's message and match it exactly
 
 OFFICIAL HOSTEL INFORMATION:
 {content}
 
-Remember: Be helpful, friendly, and use emojis! 🌟`;
-
-const SYSTEM_PROMPT_ES = `Eres un asistente de recepción amigable del Puerto Nest Hostel. Tu nombre es "Nest Assistant" 🏠
-
-REGLAS DE FORMATO (MUY IMPORTANTE):
-- NUNCA uses formato markdown (no **, ##, *, -, etc.)
-- Escribe solo en texto plano
-- Usa emojis para hacer las respuestas amigables y visuales 😊
-- Usa saltos de línea para separar secciones
-- Para listas, usa emojis como viñetas (📍, ✨, 🚌, 💰, 📞, etc.)
-
-ESTILO DE RESPUESTA:
-- Sé cálido, amigable y acogedor
-- Usa emojis relevantes en tus respuestas
-- Mantén la información clara y fácil de leer
-- Usa formato simple con saltos de línea
-
-REGLAS CRÍTICAS:
-1. Usa la siguiente información del hostel como ÚNICA fuente de información
-2. Mantén todas las direcciones, teléfonos, precios y horarios EXACTAMENTE como están escritos
-3. NO inventes información faltante
-4. Si algo no está en este documento, responde: "Por favor, consulta en recepción para más información 😊"
-5. Nunca prometas disponibilidad
-6. Nunca cambies precios ni horarios
-
-REGLAS DE IDIOMA:
-- Idioma por defecto: Español
-- Si el huésped escribe en inglés, responde en inglés
-- No mezcles idiomas
-
-INFORMACIÓN OFICIAL DEL HOSTEL:
-{content}
-
-Recuerda: ¡Sé servicial, amigable y usa emojis! 🌟`;
+Remember: Be helpful, friendly, use emojis, and ALWAYS match the guest's language! 🌟`;
 
 serve(async (req) => {
   if (req.method === "OPTIONS") {
@@ -90,12 +68,12 @@ serve(async (req) => {
     const supabaseKey = Deno.env.get("SUPABASE_ANON_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseKey);
 
-    // Fetch all active hostel content for the current language
+    // Fetch all active hostel content in both languages
     const { data: contentData, error: contentError } = await supabase
       .from("hostel_content")
-      .select("category, title, content")
-      .eq("language", language)
+      .select("category, title, content, language")
       .eq("is_active", true)
+      .order("language")
       .order("category")
       .order("sort_order");
 
@@ -103,7 +81,7 @@ serve(async (req) => {
       console.error("Error fetching content:", contentError);
     }
 
-    // Format content by category
+    // Format content by language and category
     const categoryLabels: Record<string, { en: string; es: string }> = {
       check_in_out: { en: "Check-in & Check-out", es: "Check-in y Check-out" },
       house_rules: { en: "House Rules", es: "Reglas de la Casa" },
@@ -117,30 +95,33 @@ serve(async (req) => {
 
     let formattedContent = "";
     if (contentData && contentData.length > 0) {
-      const groupedContent: Record<string, Array<{ title: string; content: string }>> = {};
+      // Group by language first, then category
+      const byLanguage: Record<string, Record<string, Array<{ title: string; content: string }>>> = {};
       
       for (const item of contentData) {
-        if (!groupedContent[item.category]) {
-          groupedContent[item.category] = [];
-        }
-        groupedContent[item.category].push({ title: item.title, content: item.content });
+        const lang = item.language || "en";
+        if (!byLanguage[lang]) byLanguage[lang] = {};
+        if (!byLanguage[lang][item.category]) byLanguage[lang][item.category] = [];
+        byLanguage[lang][item.category].push({ title: item.title, content: item.content });
       }
 
-      for (const [category, items] of Object.entries(groupedContent)) {
-        const label = categoryLabels[category]?.[language as "en" | "es"] || category;
-        formattedContent += `\n## ${label}\n`;
-        for (const item of items) {
-          formattedContent += `### ${item.title}\n${item.content}\n\n`;
+      for (const [lang, categories] of Object.entries(byLanguage)) {
+        const langLabel = lang === "es" ? "ESPAÑOL" : "ENGLISH";
+        formattedContent += `\n=== ${langLabel} ===\n`;
+        
+        for (const [category, items] of Object.entries(categories)) {
+          const label = categoryLabels[category]?.[lang as "en" | "es"] || category;
+          formattedContent += `\n## ${label}\n`;
+          for (const item of items) {
+            formattedContent += `### ${item.title}\n${item.content}\n\n`;
+          }
         }
       }
     } else {
-      formattedContent = language === "es" 
-        ? "No hay información del hostel configurada todavía."
-        : "No hostel information has been configured yet.";
+      formattedContent = "No hostel information has been configured yet. / No hay información del hostel configurada todavía.";
     }
 
-    const systemPrompt = (language === "es" ? SYSTEM_PROMPT_ES : SYSTEM_PROMPT_EN)
-      .replace("{content}", formattedContent);
+    const systemPrompt = SYSTEM_PROMPT.replace("{content}", formattedContent);
 
     console.log("Sending request to AI with", messages.length, "messages");
 
