@@ -11,7 +11,6 @@ import { LanguageToggle } from "@/components/chat/LanguageToggle";
 import { useChat } from "@/hooks/useChat";
 import { Language, useTranslations } from "@/lib/i18n";
 import { useToast } from "@/hooks/use-toast";
-import { useAnalytics } from "@/hooks/useAnalytics";
 
 export default function GuestChat() {
   const [language, setLanguage] = useState<Language>("en");
@@ -19,7 +18,6 @@ export default function GuestChat() {
   const { messages, isLoading, error, sendMessage, clearMessages } = useChat(language);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
-  const { trackQuestionSent, trackActivity } = useAnalytics();
 
   const toggleLanguage = () => {
     const newLang = language === "en" ? "es" : "en";
@@ -44,12 +42,10 @@ export default function GuestChat() {
   }, [error, toast]);
 
   const handleCardClick = (topic: string) => {
-    trackQuestionSent();
     sendMessage(topic);
   };
 
   const handleSendMessage = (content: string) => {
-    trackQuestionSent();
     sendMessage(content);
   };
 
