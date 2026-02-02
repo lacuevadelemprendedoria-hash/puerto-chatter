@@ -189,6 +189,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      increment_analytics_counter: {
+        Args: { counter_name: string; target_date: string }
+        Returns: undefined
+      }
       is_admin: { Args: { _user_id: string }; Returns: boolean }
     }
     Enums: {

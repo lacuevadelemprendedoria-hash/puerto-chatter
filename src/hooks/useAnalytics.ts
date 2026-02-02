@@ -58,44 +58,21 @@ export function useAnalytics() {
   const hasTrackedVisitor = useRef(false);
   const hasTrackedSession = useRef(false);
 
-  // Increment a counter in analytics_daily using upsert
+  // Increment a counter in analytics_daily using atomic database function
   const incrementCounter = useCallback(async (eventType: EventType) => {
     const today = getTodayDate();
     const columnName = `${eventType}_count`;
 
     try {
-      // Use upsert with raw SQL increment to handle race conditions atomically
-      // First, try to insert. If it fails due to conflict, update instead.
-      const { error: upsertError } = await supabase
-        .from("analytics_daily")
-        .upsert(
-          { 
-            date: today, 
-            [columnName]: 1,
-            opens_count: eventType === 'opens' ? 1 : 0,
-            unique_visitors_count: eventType === 'unique_visitors' ? 1 : 0,
-            sessions_count: eventType === 'sessions' ? 1 : 0,
-            questions_count: eventType === 'questions' ? 1 : 0,
-            emails_count: eventType === 'emails' ? 1 : 0,
-          },
-          { 
-            onConflict: 'date',
-            ignoreDuplicates: false 
-          }
-        );
+      // Use the atomic database function to handle race conditions
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const { error } = await (supabase.rpc as any)('increment_analytics_counter', {
+        target_date: today,
+        counter_name: columnName
+      });
 
-      // If upsert inserted a new row, we're done. If it updated, we need to increment.
-      // Since upsert replaces values, we need a different approach for incrementing existing rows.
-      // Use RPC call or direct update after upsert attempt.
-      
-      if (upsertError && upsertError.code === '23505') {
-        // Row exists, do an increment update using raw increment
-        await supabase.rpc('increment_analytics_counter', {
-          target_date: today,
-          counter_name: columnName
-        });
-      } else if (upsertError) {
-        console.debug("Analytics upsert error:", upsertError);
+      if (error) {
+        console.debug("Analytics increment error:", error);
       }
     } catch (error) {
       // Silent fail - analytics should never break the app
@@ -103,21 +80,21 @@ export function useAnalytics() {
     }
   }, []);
 
-  // Check if visitor is new (first time seeing this visitor_id)
+  // Check if visitor is new and track - uses insert with conflict handling
   const checkAndTrackNewVisitor = useCallback(async (visitorId: string) => {
     try {
-      const { data: existing, error } = await supabase
+      // Try to insert - if visitor already exists, it will fail silently
+      const { error } = await supabase
         .from("analytics_visitors")
-        .select("id")
-        .eq("visitor_id", visitorId)
-        .maybeSingle();
+        .insert({ visitor_id: visitorId });
 
-      if (!existing && !error) {
-        // New visitor - record and increment counter
-        await supabase
-          .from("analytics_visitors")
-          .insert({ visitor_id: visitorId });
+      // If insert succeeded (no error or no conflict), it's a new visitor
+      if (!error) {
         await incrementCounter("unique_visitors");
+      }
+      // If error is duplicate key (23505), visitor already exists - that's fine
+      else if (error.code !== '23505') {
+        console.debug("Analytics visitor check error:", error);
       }
     } catch (error) {
       console.debug("Analytics visitor check error:", error);
