@@ -8,7 +8,6 @@ import { useToast } from "@/hooks/use-toast";
 import { Building2, LogOut, Loader2, Plus } from "lucide-react";
 import { ContentEditor } from "@/components/admin/ContentEditor";
 import { ContentList } from "@/components/admin/ContentList";
-import { AnalyticsCard } from "@/components/admin/AnalyticsCard";
 import { Language, useTranslations } from "@/lib/i18n";
 import type { Database } from "@/integrations/supabase/types";
 
@@ -145,8 +144,6 @@ export default function AdminDashboard() {
 
       {/* Main content */}
       <main className="container px-4 py-6 space-y-6">
-        {/* Analytics */}
-        <AnalyticsCard />
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
