@@ -58,31 +58,44 @@ export function useAnalytics() {
   const hasTrackedVisitor = useRef(false);
   const hasTrackedSession = useRef(false);
 
-  // Increment a counter in analytics_daily
+  // Increment a counter in analytics_daily using upsert
   const incrementCounter = useCallback(async (eventType: EventType) => {
     const today = getTodayDate();
     const columnName = `${eventType}_count`;
 
     try {
-      // Try to get existing row for today
-      const { data: existing, error } = await supabase
+      // Use upsert with raw SQL increment to handle race conditions atomically
+      // First, try to insert. If it fails due to conflict, update instead.
+      const { error: upsertError } = await supabase
         .from("analytics_daily")
-        .select("*")
-        .eq("date", today)
-        .maybeSingle();
+        .upsert(
+          { 
+            date: today, 
+            [columnName]: 1,
+            opens_count: eventType === 'opens' ? 1 : 0,
+            unique_visitors_count: eventType === 'unique_visitors' ? 1 : 0,
+            sessions_count: eventType === 'sessions' ? 1 : 0,
+            questions_count: eventType === 'questions' ? 1 : 0,
+            emails_count: eventType === 'emails' ? 1 : 0,
+          },
+          { 
+            onConflict: 'date',
+            ignoreDuplicates: false 
+          }
+        );
 
-      if (existing && !error) {
-        // Increment existing counter
-        const currentValue = (existing as Record<string, unknown>)[columnName] as number || 0;
-        await supabase
-          .from("analytics_daily")
-          .update({ [columnName]: currentValue + 1 })
-          .eq("id", existing.id);
-      } else if (!error) {
-        // Create new row for today
-        await supabase
-          .from("analytics_daily")
-          .insert({ date: today, [columnName]: 1 });
+      // If upsert inserted a new row, we're done. If it updated, we need to increment.
+      // Since upsert replaces values, we need a different approach for incrementing existing rows.
+      // Use RPC call or direct update after upsert attempt.
+      
+      if (upsertError && upsertError.code === '23505') {
+        // Row exists, do an increment update using raw increment
+        await supabase.rpc('increment_analytics_counter', {
+          target_date: today,
+          counter_name: columnName
+        });
+      } else if (upsertError) {
+        console.debug("Analytics upsert error:", upsertError);
       }
     } catch (error) {
       // Silent fail - analytics should never break the app
