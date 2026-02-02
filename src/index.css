@@ -128,13 +128,18 @@
 }
 
 @layer components {
-  /* Chat bubbles */
+  /* Chat bubbles - optimized for mobile readability */
   .chat-bubble-user {
-    @apply bg-[hsl(var(--chat-user))] text-[hsl(var(--chat-user-foreground))] rounded-2xl rounded-br-md px-4 py-3;
+    @apply bg-[hsl(var(--chat-user))] text-[hsl(var(--chat-user-foreground))] rounded-2xl rounded-br-md px-4 py-3 shadow-sm;
   }
 
   .chat-bubble-assistant {
-    @apply bg-[hsl(var(--chat-assistant))] text-[hsl(var(--chat-assistant-foreground))] rounded-2xl rounded-bl-md px-4 py-3;
+    @apply bg-[hsl(var(--chat-assistant))] text-[hsl(var(--chat-assistant-foreground))] rounded-2xl rounded-bl-md px-5 py-4 shadow-sm;
+    line-height: 1.7;
+  }
+
+  .chat-bubble-assistant strong {
+    @apply font-semibold text-primary;
   }
 
   /* Welcome card gradient */
