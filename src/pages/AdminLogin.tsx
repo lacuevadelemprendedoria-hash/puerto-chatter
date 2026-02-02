@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useToast } from "@/hooks/use-toast";
 import { Building2, Loader2 } from "lucide-react";
 import { z } from "zod";
@@ -19,6 +20,7 @@ export default function AdminLogin() {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [isCheckingSession, setIsCheckingSession] = useState(true);
+  const [activeTab, setActiveTab] = useState<"login" | "signup">("login");
   const navigate = useNavigate();
   const { toast } = useToast();
 
@@ -27,7 +29,6 @@ export default function AdminLogin() {
     const checkSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();
       if (session) {
-        // Check if user is admin
         const { data: adminData } = await supabase
           .from("admin_users")
           .select("id")
@@ -60,10 +61,9 @@ export default function AdminLogin() {
     return () => subscription.unsubscribe();
   }, [navigate]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Validate input
     const validation = loginSchema.safeParse({ email, password });
     if (!validation.success) {
       toast({
@@ -82,12 +82,9 @@ export default function AdminLogin() {
         password,
       });
 
-      if (error) {
-        throw error;
-      }
+      if (error) throw error;
 
       if (data.user) {
-        // Check if user is admin
         const { data: adminData, error: adminError } = await supabase
           .from("admin_users")
           .select("id")
@@ -99,7 +96,7 @@ export default function AdminLogin() {
           toast({
             variant: "destructive",
             title: "Access Denied",
-            description: "You don't have admin access. Please contact the hostel administrator.",
+            description: "You don't have admin access. Contact the administrator to add your user_id to admin_users.",
           });
           return;
         }
@@ -111,11 +108,59 @@ export default function AdminLogin() {
         navigate("/admin/dashboard");
       }
     } catch (error) {
-      console.error("Login error:", error);
       toast({
         variant: "destructive",
         title: "Login Failed",
         description: error instanceof Error ? error.message : "Invalid email or password",
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSignup = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    const validation = loginSchema.safeParse({ email, password });
+    if (!validation.success) {
+      toast({
+        variant: "destructive",
+        title: "Validation Error",
+        description: validation.error.errors[0].message,
+      });
+      return;
+    }
+
+    setIsLoading(true);
+
+    try {
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: `${window.location.origin}/admin`,
+        },
+      });
+
+      if (error) throw error;
+
+      if (data.user) {
+        toast({
+          title: "Account created!",
+          description: `Your user_id is: ${data.user.id}. Ask an admin to add it to admin_users table.`,
+        });
+        // Copy user_id to clipboard
+        navigator.clipboard.writeText(data.user.id);
+        toast({
+          title: "User ID copied!",
+          description: "The user_id has been copied to your clipboard.",
+        });
+      }
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Signup Failed",
+        description: error instanceof Error ? error.message : "Could not create account",
       });
     } finally {
       setIsLoading(false);
@@ -137,48 +182,100 @@ export default function AdminLogin() {
           <div className="mx-auto w-16 h-16 rounded-full welcome-gradient flex items-center justify-center mb-4">
             <Building2 className="w-8 h-8 text-primary-foreground" />
           </div>
-          <CardTitle className="text-2xl">Staff Login</CardTitle>
+          <CardTitle className="text-2xl">Staff Access</CardTitle>
           <CardDescription>
-            Sign in to manage hostel content
+            Sign in or create an account to manage content
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="staff@puertones.com"
-                required
-                disabled={isLoading}
-              />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
-                required
-                disabled={isLoading}
-              />
-            </div>
-            <Button type="submit" className="w-full" disabled={isLoading}>
-              {isLoading ? (
-                <>
-                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                  Signing in...
-                </>
-              ) : (
-                "Sign In"
-              )}
-            </Button>
-          </form>
+          <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as "login" | "signup")}>
+            <TabsList className="grid w-full grid-cols-2 mb-4">
+              <TabsTrigger value="login">Login</TabsTrigger>
+              <TabsTrigger value="signup">Sign Up</TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="login">
+              <form onSubmit={handleLogin} className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="login-email">Email</Label>
+                  <Input
+                    id="login-email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="staff@puertones.com"
+                    required
+                    disabled={isLoading}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="login-password">Password</Label>
+                  <Input
+                    id="login-password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="••••••••"
+                    required
+                    disabled={isLoading}
+                  />
+                </div>
+                <Button type="submit" className="w-full" disabled={isLoading}>
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      Signing in...
+                    </>
+                  ) : (
+                    "Sign In"
+                  )}
+                </Button>
+              </form>
+            </TabsContent>
+            
+            <TabsContent value="signup">
+              <form onSubmit={handleSignup} className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="signup-email">Email</Label>
+                  <Input
+                    id="signup-email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="staff@puertones.com"
+                    required
+                    disabled={isLoading}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="signup-password">Password</Label>
+                  <Input
+                    id="signup-password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="••••••••"
+                    required
+                    disabled={isLoading}
+                  />
+                </div>
+                <Button type="submit" className="w-full" disabled={isLoading}>
+                  {isLoading ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      Creating account...
+                    </>
+                  ) : (
+                    "Create Account"
+                  )}
+                </Button>
+                <p className="text-xs text-muted-foreground text-center">
+                  After signup, your user_id will be copied. Share it with an admin to get access.
+                </p>
+              </form>
+            </TabsContent>
+          </Tabs>
+          
           <div className="mt-6 text-center">
             <Button variant="link" onClick={() => navigate("/")} className="text-muted-foreground">
               ← Back to Guest Chat
