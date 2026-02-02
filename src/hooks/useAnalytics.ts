@@ -1,10 +1,15 @@
-import { useCallback, useRef, useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 
 const VISITOR_ID_KEY = "pn_visitor_id";
 const SESSION_ID_KEY = "pn_session_id";
 const SESSION_ACTIVITY_KEY = "pn_session_activity";
 const SESSION_TIMEOUT_MS = 30 * 60 * 1000; // 30 minutes
+
+// Keys for tracking (use sessionStorage to survive StrictMode remounts)
+const TRACKED_OPEN_KEY = "pn_tracked_open";
+const TRACKED_VISITOR_KEY = "pn_tracked_visitor";
+const TRACKED_SESSION_KEY = "pn_tracked_session";
 
 // Generate or retrieve visitor ID (persists across visits)
 function getOrCreateVisitorId(): string {
@@ -54,17 +59,12 @@ function getTodayDate(): string {
 type EventType = "opens" | "unique_visitors" | "sessions" | "questions" | "emails";
 
 export function useAnalytics() {
-  const hasTrackedOpen = useRef(false);
-  const hasTrackedVisitor = useRef(false);
-  const hasTrackedSession = useRef(false);
-
   // Increment a counter in analytics_daily using atomic database function
   const incrementCounter = useCallback(async (eventType: EventType) => {
     const today = getTodayDate();
     const columnName = `${eventType}_count`;
 
     try {
-      // Use the atomic database function to handle race conditions
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const { error } = await (supabase.rpc as any)('increment_analytics_counter', {
         target_date: today,
@@ -75,25 +75,20 @@ export function useAnalytics() {
         console.debug("Analytics increment error:", error);
       }
     } catch (error) {
-      // Silent fail - analytics should never break the app
       console.debug("Analytics error:", error);
     }
   }, []);
 
-  // Check if visitor is new and track - uses insert with conflict handling
+  // Check if visitor is new and track
   const checkAndTrackNewVisitor = useCallback(async (visitorId: string) => {
     try {
-      // Try to insert - if visitor already exists, it will fail silently
       const { error } = await supabase
         .from("analytics_visitors")
         .insert({ visitor_id: visitorId });
 
-      // If insert succeeded (no error or no conflict), it's a new visitor
       if (!error) {
         await incrementCounter("unique_visitors");
-      }
-      // If error is duplicate key (23505), visitor already exists - that's fine
-      else if (error.code !== '23505') {
+      } else if (error.code !== '23505') {
         console.debug("Analytics visitor check error:", error);
       }
     } catch (error) {
@@ -101,10 +96,14 @@ export function useAnalytics() {
     }
   }, [incrementCounter]);
 
-  // Track app open (called once per page load)
+  // Track app open (called once per page load, survives StrictMode)
   const trackAppOpen = useCallback(async () => {
-    if (hasTrackedOpen.current) return;
-    hasTrackedOpen.current = true;
+    // Use sessionStorage to survive React StrictMode remounts
+    const pageLoadId = performance.timeOrigin.toString();
+    const trackedKey = `${TRACKED_OPEN_KEY}_${pageLoadId}`;
+    
+    if (sessionStorage.getItem(trackedKey)) return;
+    sessionStorage.setItem(trackedKey, "true");
 
     const visitorId = getOrCreateVisitorId();
     const { isNew: isNewSession } = getOrCreateSessionId();
@@ -112,20 +111,22 @@ export function useAnalytics() {
     // Track app open
     await incrementCounter("opens");
 
-    // Track unique visitor (only if not tracked this session)
-    if (!hasTrackedVisitor.current) {
-      hasTrackedVisitor.current = true;
+    // Track unique visitor
+    const visitorTrackedKey = `${TRACKED_VISITOR_KEY}_${pageLoadId}`;
+    if (!sessionStorage.getItem(visitorTrackedKey)) {
+      sessionStorage.setItem(visitorTrackedKey, "true");
       await checkAndTrackNewVisitor(visitorId);
     }
 
     // Track session start
-    if (isNewSession && !hasTrackedSession.current) {
-      hasTrackedSession.current = true;
+    const sessionTrackedKey = `${TRACKED_SESSION_KEY}_${pageLoadId}`;
+    if (isNewSession && !sessionStorage.getItem(sessionTrackedKey)) {
+      sessionStorage.setItem(sessionTrackedKey, "true");
       await incrementCounter("sessions");
     }
   }, [incrementCounter, checkAndTrackNewVisitor]);
 
-  // Track question sent (no content stored, just count)
+  // Track question sent
   const trackQuestionSent = useCallback(async () => {
     updateActivity();
     await incrementCounter("questions");
@@ -137,7 +138,7 @@ export function useAnalytics() {
     await incrementCounter("emails");
   }, [incrementCounter]);
 
-  // Track user activity (resets session timeout)
+  // Track user activity
   const trackActivity = useCallback(() => {
     updateActivity();
   }, []);
