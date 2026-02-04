@@ -97,8 +97,8 @@ export default function GuestChat() {
                 description={t.actionCards.carnival.description}
                 highlighted
                 onClick={() => handleCardClick(language === "en" 
-                  ? "Tell me about Carnival festivities and events" 
-                  : "Cuéntame sobre las fiestas y eventos del Carnaval"
+                  ? "Tell me about Carnival: 🎭🎉 Santa Cruz de Tenerife and 🎭🎉 Puerto de la Cruz" 
+                  : "Cuéntame sobre el Carnaval: 🎭🎉 Santa Cruz de Tenerife y 🎭🎉 Puerto de la Cruz"
                 )}
               />
               <ActionCard
