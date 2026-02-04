@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Settings, Ticket, Building, Palmtree, Bus } from "lucide-react";
+import { Settings, Ticket, Building, Palmtree, Bus, PartyPopper } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ChatMessage } from "@/components/chat/ChatMessage";
 import { ChatInput } from "@/components/chat/ChatInput";
@@ -89,6 +89,16 @@ export default function GuestChat() {
                 onClick={() => handleCardClick(language === "en" 
                   ? "Tell me about the Nest Pass" 
                   : "Cuéntame sobre el Nest Pass"
+                )}
+              />
+              <ActionCard
+                icon={PartyPopper}
+                title={t.actionCards.carnival.title}
+                description={t.actionCards.carnival.description}
+                highlighted
+                onClick={() => handleCardClick(language === "en" 
+                  ? "Tell me about Carnival festivities and events" 
+                  : "Cuéntame sobre las fiestas y eventos del Carnaval"
                 )}
               />
               <ActionCard

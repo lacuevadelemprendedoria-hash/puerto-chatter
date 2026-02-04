@@ -12,6 +12,10 @@ export const translations = {
         title: "Nest Pass",
         description: "Move between Nest Hostels at a special price",
       },
+      carnival: {
+        title: "Carnival",
+        description: "Festivities, parades, events",
+      },
       hostelInfo: {
         title: "Hostel Info & Bookings",
         description: "Check-in, house rules, reservations",
@@ -87,6 +91,10 @@ export const translations = {
       nestPass: {
         title: "Nest Pass",
         description: "Viaja entre Nest Hostels a precio especial",
+      },
+      carnival: {
+        title: "Carnaval",
+        description: "Fiestas, desfiles, eventos",
       },
       hostelInfo: {
         title: "Info del Hostel",
