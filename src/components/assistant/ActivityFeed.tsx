@@ -125,25 +125,22 @@ export function ActivityFeed({ t, language, onOpenChat }: ActivityFeedProps) {
       content: (
         <div className="pt-2 space-y-3">
           {[
-            { emoji: "🍽️", name: "Tasca El Coto", desc: language === "en" ? "Traditional tapas · 5 min walk" : "Tapas tradicionales · 5 min andando" },
-            { emoji: "☕", name: "Café Dinámico", desc: language === "en" ? "Best coffee · 7 min walk" : "Mejor café · 7 min andando" },
-            { emoji: "🐟", name: "El Limón", desc: language === "en" ? "Fresh fish · 12 min walk" : "Pescado fresco · 12 min andando" },
+            { emoji: "🍽️", desc: language === "en" ? "Canarian tapas · short walk" : "Tapas canarias · poca distancia" },
+            { emoji: "☕", desc: language === "en" ? "Local cafés · old town area" : "Cafeterías locales · casco viejo" },
+            { emoji: "🐟", desc: language === "en" ? "Fresh fish & seafood · ask us for today's pick" : "Pescado y marisco fresco · pregúntanos" },
           ].map((place, i) => (
             <div key={i} className="flex items-start gap-3">
               <span className="text-xl">{place.emoji}</span>
-              <div>
-                <p className="font-semibold text-foreground text-sm">{place.name}</p>
-                <p className="text-xs text-muted-foreground">{place.desc}</p>
-              </div>
+              <p className="text-sm text-muted-foreground">{place.desc}</p>
             </div>
           ))}
           <button
             onClick={() => onOpenChat(
               language === "en" ? "Where can I eat nearby?" : "¿Dónde puedo comer cerca?"
             )}
-            className="mt-1 w-full py-2 px-3 rounded-xl bg-muted text-foreground font-semibold text-sm hover:bg-muted/80 transition-colors"
+            className="mt-1 w-full py-2 px-3 rounded-xl bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-colors"
           >
-            {language === "en" ? "More recommendations" : "Más recomendaciones"}
+            {language === "en" ? "Ask assistant for recommendations" : "Pedir recomendaciones al asistente"}
           </button>
         </div>
       ),
