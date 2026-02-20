@@ -241,6 +241,15 @@ function ResultsContent({
       onOpenChat();
       return;
     }
+    // "Book now" / "Reservar" — open chat with booking query
+    if (action.toLowerCase().includes("book") || action.toLowerCase() === "reservar") {
+      const query = language === "en"
+        ? `I want to join the "${title}" experience, how do I book?`
+        : `Quiero unirme a la experiencia "${title}", ¿cómo reservo?`;
+      onClose();
+      onOpenChat(query);
+      return;
+    }
     const query = language === "en"
       ? `Tell me more about "${title}"`
       : `Cuéntame más sobre "${title}"`;

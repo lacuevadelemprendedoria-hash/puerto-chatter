@@ -23,6 +23,7 @@ export function getResultKey(flowId: FlowId, selections: Record<string, string>)
     case "planDay": {
       const mood = selections["step1"] || "relax";
       const time = selections["step2"] || "2h";
+      if (mood === "nest") return `nest_${time}`;
       return `${mood}_${time}`;
     }
     case "hostelInfo": {

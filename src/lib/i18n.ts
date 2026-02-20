@@ -68,6 +68,7 @@ export const translations = {
             { label: "🏔️ Nature", value: "nature" },
             { label: "🎉 Social", value: "social" },
             { label: "🗺️ Explore", value: "explore" },
+            { label: "🧗 Nest Experiences", value: "nest" },
           ],
         },
         step2: {
@@ -207,6 +208,20 @@ export const translations = {
         { icon: "🌺", title: "Loro Parque", desc: "Famous animal & plant park — ask us for directions", action: "Ask assistant" },
         { icon: "🏘️", title: "La Orotava", desc: "Nearby historic town", action: "Ask assistant" },
         { icon: "🌊", title: "Los Gigantes cliffs", desc: "Dramatic cliffs — ask us how to get there", action: "Ask assistant" },
+      ],
+      nest_2h: [
+        { icon: "🧗", title: "Rock Climbing", desc: "No experience needed · Contact +34613356187 to book", action: "Book now" },
+      ],
+      nest_half: [
+        { icon: "🧗", title: "Rock Climbing", desc: "No experience needed · Contact +34613356187 to book", action: "Book now" },
+        { icon: "🌊", title: "Malpaís de Güímar", desc: "Volcanic lava fields · Half day · 20€ · Pickup from Las Eras · Contact Alessio +393391886061", action: "Book now" },
+      ],
+      nest_full: [
+        { icon: "🌌", title: "Stargazing on Teide", desc: "One of the world's best stargazing spots · Souvenir photo included · Pickup: Ashavana, Medano, Los Amigos, Duque Nest · Contact Claudio +393294096754", action: "Book now" },
+        { icon: "🌋", title: "Teide National Park", desc: "Every Wednesday · See the real volcano that built Tenerife · Canarian coffee, hiking & 2000m sunset · Free pickup at the hostel · Contact Claudio +393294096754", action: "Book now" },
+        { icon: "🌿", title: "Anaga Full Day", desc: "Guided hike through laurel forest & ocean viewpoints · Easy/medium · Pickup included · Contact Alessio +393391886061", action: "Book now" },
+        { icon: "🌊", title: "Malpaís de Güímar", desc: "Volcanic cones & lava fields where lava meets the ocean · Half day · 20€ · Pickup from Las Eras · Contact Alessio +393391886061", action: "Book now" },
+        { icon: "🧗", title: "Rock Climbing", desc: "No experience needed · Contact +34613356187 to book", action: "Book now" },
       ],
       airport_bus: [
         { icon: "🚌", title: "Bus 343 to TFS", desc: "From Intercambiador · ~2h · ~€15", action: "Ask assistant" },
@@ -385,6 +400,7 @@ export const translations = {
             { label: "🏔️ Naturaleza", value: "nature" },
             { label: "🎉 Social", value: "social" },
             { label: "🗺️ Explorar", value: "explore" },
+            { label: "🧗 Nest Experiences", value: "nest" },
           ],
         },
         step2: {
@@ -524,6 +540,20 @@ export const translations = {
         { icon: "🌺", title: "Loro Parque", desc: "Parque de animales y plantas — pregúntanos cómo llegar", action: "Preguntar al asistente" },
         { icon: "🏘️", title: "La Orotava", desc: "Pueblo histórico cercano", action: "Preguntar al asistente" },
         { icon: "🌊", title: "Acantilados de Los Gigantes", desc: "Acantilados dramáticos — pregúntanos cómo llegar", action: "Preguntar al asistente" },
+      ],
+      nest_2h: [
+        { icon: "🧗", title: "Rock Climbing", desc: "Sin experiencia necesaria · Contacta +34613356187 para reservar", action: "Reservar" },
+      ],
+      nest_half: [
+        { icon: "🧗", title: "Rock Climbing", desc: "Sin experiencia necesaria · Contacta +34613356187 para reservar", action: "Reservar" },
+        { icon: "🌊", title: "Malpaís de Güímar", desc: "Campos de lava volcánica · Medio día · 20€ · Recogida desde Las Eras · Contacta Alessio +393391886061", action: "Reservar" },
+      ],
+      nest_full: [
+        { icon: "🌌", title: "Stargazing en el Teide", desc: "Uno de los mejores cielos del mundo · Foto souvenir incluida · Recogida: Ashavana, Medano, Los Amigos, Duque Nest · Contacta Claudio +393294096754", action: "Reservar" },
+        { icon: "🌋", title: "Parque Nacional del Teide", desc: "Cada miércoles · Descubre el volcán real que construyó Tenerife · Café canario, senderismo y atardecer a 2.000m · Recogida gratis en el hostel · Contacta Claudio +393294096754", action: "Reservar" },
+        { icon: "🌿", title: "Anaga Día Completo", desc: "Senderismo guiado por laurisilva y miradores al océano · Fácil/media · Recogida incluida · Contacta Alessio +393391886061", action: "Reservar" },
+        { icon: "🌊", title: "Malpaís de Güímar", desc: "Conos volcánicos donde la lava se encuentra con el mar · Medio día · 20€ · Recogida desde Las Eras · Contacta Alessio +393391886061", action: "Reservar" },
+        { icon: "🧗", title: "Rock Climbing", desc: "Sin experiencia necesaria · Contacta +34613356187 para reservar", action: "Reservar" },
       ],
       airport_bus: [
         { icon: "🚌", title: "Bus 343 a TFS", desc: "Desde el Intercambiador · ~2h · ~€15", action: "Preguntar al asistente" },
