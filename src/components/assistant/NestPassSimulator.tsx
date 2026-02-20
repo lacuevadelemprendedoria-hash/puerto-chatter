@@ -2,8 +2,12 @@ import { useState } from "react";
 import { Minus, Plus } from "lucide-react";
 import { Translations } from "@/lib/i18n";
 
-const PRICE_PER_NIGHT = 22; // EUR standard
-const DISCOUNT_RATE = 0.25; // 25% average discount
+const STANDARD_PRICE_PER_NIGHT = 40; // EUR without pass
+
+function getPassPricePerNight(nights: number): number {
+  if (nights >= 28) return 25;
+  return 29;
+}
 
 interface NestPassSimulatorProps {
   t: Translations;
@@ -12,12 +16,13 @@ interface NestPassSimulatorProps {
 export function NestPassSimulator({ t }: NestPassSimulatorProps) {
   const [nights, setNights] = useState(7);
 
-  const standard = nights * PRICE_PER_NIGHT;
-  const withPass = Math.round(standard * (1 - DISCOUNT_RATE));
+  const pricePerNight = getPassPricePerNight(nights);
+  const withPass = nights * pricePerNight;
+  const standard = nights * STANDARD_PRICE_PER_NIGHT;
   const savings = standard - withPass;
 
   const decrement = () => setNights((n) => Math.max(7, n - 1));
-  const increment = () => setNights((n) => Math.min(30, n + 1));
+  const increment = () => setNights((n) => Math.min(60, n + 1));
 
   return (
     <div className="bg-muted/50 rounded-xl p-4 space-y-4">
@@ -45,6 +50,13 @@ export function NestPassSimulator({ t }: NestPassSimulatorProps) {
         </button>
       </div>
 
+      {/* Tier badge */}
+      <div className="flex justify-center">
+        <span className={`text-xs font-bold px-3 py-1 rounded-full ${nights >= 28 ? "bg-accent text-accent-foreground" : "bg-primary/10 text-primary"}`}>
+          {nights >= 28 ? "🔥 Long Stay — €25/night" : "€29/night"}
+        </span>
+      </div>
+
       {/* Price breakdown */}
       <div className="space-y-2">
         <div className="flex justify-between items-center">
@@ -53,7 +65,10 @@ export function NestPassSimulator({ t }: NestPassSimulatorProps) {
         </div>
         <div className="flex justify-between items-center">
           <span className="text-sm font-medium text-foreground">{t.nestPassSimulator.withPass}</span>
-          <span className="text-sm font-bold text-primary">€{withPass}</span>
+          <div className="text-right">
+            <span className="text-sm font-bold text-primary">€{withPass}</span>
+            <span className="text-xs text-muted-foreground ml-1">(€{pricePerNight}/noche)</span>
+          </div>
         </div>
         <div className="flex justify-between items-center border-t border-border pt-2">
           <span className="text-sm font-bold text-foreground">{t.nestPassSimulator.youSave}</span>
