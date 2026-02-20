@@ -97,9 +97,9 @@ export function ActivityFeed({ t, language, onOpenChat }: ActivityFeedProps) {
       content: (
         <div className="pt-2 space-y-2">
           {[
-            { emoji: "☀️", text: language === "en" ? "Good morning! Reception opens at 08:00" : "¡Buenos días! Recepción abre a las 08:00" },
-            { emoji: "🍳", text: language === "en" ? "Kitchen available 07:00–23:00" : "Cocina disponible 07:00–23:00" },
-            { emoji: "🌙", text: language === "en" ? "Quiet hours from 22:00" : "Silencio nocturno desde las 22:00" },
+            { emoji: "☀️", text: language === "en" ? "Reception open 14:00–21:00" : "Recepción abierta 14:00–21:00" },
+            { emoji: "🍳", text: language === "en" ? "Kitchen available 08:00–22:30" : "Cocina disponible 08:00–22:30" },
+            { emoji: "🌙", text: language === "en" ? "Quiet hours 23:00–08:00" : "Silencio nocturno 23:00–08:00" },
           ].map((item, i) => (
             <div key={i} className="flex items-start gap-2 text-sm">
               <span>{item.emoji}</span>
