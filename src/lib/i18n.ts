@@ -7,41 +7,273 @@ export const translations = {
       subtitle: "Your virtual hostel assistant",
       description: "Ask me anything about the hostel, WiFi, check-in, excursions and more",
     },
-    actionCards: {
-      nestPass: {
-        title: "Nest Pass",
-        description: "Move between Nest Hostels at a special price",
-      },
+    greeting: {
+      morning: "Good morning",
+      afternoon: "Good afternoon",
+      evening: "Good evening",
+    },
+    statusPanel: {
+      weather: "22°C · Sunny",
+      eventToday: "Carnival Week 🎭",
+      quickHelp: "Quick Help",
+      nightsLeft: (n: number) => n === 1 ? "1 night left" : `${n} nights left`,
+    },
+    quickActions: {
+      planDay: "Plan My Day",
+      hostelInfo: "Hostel Info",
+      eventsToday: "Events Today",
+      transport: "Transport",
+      eatOut: "Eat & Go Out",
+      needHelp: "I Need Help",
+    },
+    feed: {
+      title: "Today at the Hostel",
       carnival: {
-        title: "Carnival",
-        description: "Festivities, parades, events",
+        title: "🎭 Carnival 2025",
+        subtitle: "Santa Cruz & Puerto de la Cruz",
+        preview: "Two great carnivals happening now",
+        santaCruz: "🎭🎉 Santa Cruz de Tenerife",
+        santaCruzDesc: "The biggest carnival in Spain — parades, costumes, and street parties every night.",
+        puertoCruz: "🎭🎉 Puerto de la Cruz",
+        puertoCruzDesc: "Charming local carnival with traditional music, rondallas, and neighborhood celebrations.",
+        shuttle: "Shuttle to Santa Cruz",
+        moreInfo: "More Info",
+      },
+      nestPass: {
+        title: "🏷️ Nest Pass",
+        subtitle: "Save up to 30%",
+        preview: "Stay across multiple Nest Hostels",
+        description: "Move between Nest Hostels in Tenerife and Gran Canaria at a special price. Minimum 7 nights.",
+        simulate: "Calculate My Savings",
+        learnMore: "Learn More",
+      },
+      hostelToday: {
+        title: "🏠 Hostel Today",
+        subtitle: "Activities & info",
+        preview: "See what's on today",
+      },
+      eatRecommended: {
+        title: "🍽️ Where to Eat",
+        subtitle: "Staff picks nearby",
+        preview: "Our favorite spots",
+      },
+    },
+    flows: {
+      planDay: {
+        title: "Plan My Day",
+        step1: {
+          question: "What are you in the mood for?",
+          options: [
+            { label: "🌴 Relax", value: "relax" },
+            { label: "🏔️ Nature", value: "nature" },
+            { label: "🎉 Social", value: "social" },
+            { label: "🗺️ Explore", value: "explore" },
+          ],
+        },
+        step2: {
+          question: "How much time do you have?",
+          options: [
+            { label: "⚡ 2 hours", value: "2h" },
+            { label: "🌅 Half day", value: "half" },
+            { label: "☀️ Full day", value: "full" },
+          ],
+        },
       },
       hostelInfo: {
-        title: "Hostel Info & Bookings",
-        description: "Check-in, house rules, reservations",
+        title: "Hostel Info",
+        step1: {
+          question: "What do you need?",
+          options: [
+            { label: "🕐 Check-in / Check-out", value: "check_in_out" },
+            { label: "📋 House Rules", value: "house_rules" },
+            { label: "📶 WiFi", value: "wifi" },
+            { label: "🍳 Kitchen", value: "kitchen" },
+            { label: "👕 Laundry", value: "laundry" },
+          ],
+        },
       },
-      excursions: {
-        title: "Excursions & Things to Do",
-        description: "Tours, beaches, activities",
+      events: {
+        title: "Events Today",
       },
       transport: {
         title: "Transport",
-        description: "Airports, buses, taxis",
+        step1: {
+          question: "Where do you want to go?",
+          options: [
+            { label: "✈️ Airport (TFN/TFS)", value: "airport" },
+            { label: "🚌 Bus Station", value: "bus_station" },
+            { label: "🌆 Santa Cruz", value: "santa_cruz" },
+            { label: "🏖️ Beaches", value: "beaches" },
+            { label: "⛰️ Teide", value: "teide" },
+          ],
+        },
+        step2: {
+          question: "How do you prefer to travel?",
+          options: [
+            { label: "🚌 Bus", value: "bus" },
+            { label: "🚕 Taxi / Uber", value: "taxi" },
+            { label: "🛵 Rental", value: "rental" },
+          ],
+        },
       },
+      eatOut: {
+        title: "Eat & Go Out",
+        step1: {
+          question: "What are you looking for?",
+          options: [
+            { label: "🍽️ Sit-down dinner", value: "dinner" },
+            { label: "🍕 Quick & casual", value: "casual" },
+            { label: "🍺 Drinks & bar", value: "bar" },
+            { label: "🌅 Breakfast / Brunch", value: "breakfast" },
+          ],
+        },
+        step2: {
+          question: "How far are you willing to walk?",
+          options: [
+            { label: "🚶 5 min", value: "5min" },
+            { label: "🚶‍♂️ 15 min", value: "15min" },
+            { label: "🚌 Take a bus", value: "bus" },
+          ],
+        },
+      },
+      needHelp: {
+        title: "I Need Help",
+        step1: {
+          question: "What do you need help with?",
+          options: [
+            { label: "🔑 Lost key / room access", value: "key" },
+            { label: "🏥 Medical / Emergency", value: "medical" },
+            { label: "💼 Luggage storage", value: "luggage" },
+            { label: "🔇 Noise complaint", value: "noise" },
+            { label: "💬 Speak to staff", value: "staff" },
+          ],
+        },
+      },
+    },
+    nestPassSimulator: {
+      title: "Nest Pass Savings Calculator",
+      description: "How many nights are you planning to stay across Nest Hostels?",
+      nights: "Nights",
+      standardPrice: "Standard price",
+      withPass: "With Nest Pass",
+      youSave: "You save",
+      cta: "Ask about Nest Pass",
+    },
+    results: {
+      relax_2h: [
+        { icon: "🌊", title: "Playa Jardín", desc: "5 min walk · Black sand volcanic beach", action: "How to get there" },
+        { icon: "☕", title: "Café La Ranilla", desc: "10 min walk · Cozy local coffee spot", action: "See location" },
+      ],
+      relax_half: [
+        { icon: "🌊", title: "Playa Jardín", desc: "5 min walk · Relax all morning", action: "How to get there" },
+        { icon: "🌿", title: "Jardín Botánico", desc: "15 min bus · Beautiful gardens", action: "Bus info" },
+        { icon: "☕", title: "La Ranilla Quarter", desc: "Explore the old town at your pace", action: "Map" },
+      ],
+      relax_full: [
+        { icon: "🌊", title: "Playa Jardín", desc: "Morning swim", action: "How to get there" },
+        { icon: "🌿", title: "Jardín Botánico", desc: "Afternoon stroll", action: "Bus info" },
+        { icon: "🌅", title: "Sunset at the pier", desc: "Evening walk & dinner", action: "Map" },
+      ],
+      nature_2h: [
+        { icon: "🌊", title: "Playa Bollullo", desc: "30 min bus · Secluded natural beach", action: "How to get there" },
+        { icon: "🦎", title: "Coastal trail", desc: "Walk along the volcanic coastline", action: "Trail map" },
+      ],
+      nature_half: [
+        { icon: "🏔️", title: "La Orotava Valley", desc: "45 min bus · Stunning views", action: "Bus info" },
+        { icon: "🌲", title: "Corona Forestal", desc: "Laurel forest hiking", action: "Trail map" },
+      ],
+      nature_full: [
+        { icon: "🌋", title: "Mount Teide", desc: "Full day trip · Book cable car in advance", action: "Book now" },
+        { icon: "🐋", title: "Whale watching", desc: "South coast · Afternoon departure", action: "Book now" },
+      ],
+      social_2h: [
+        { icon: "🎭", title: "Carnival at the Plaza", desc: "Start at Plaza del Charco", action: "Map" },
+        { icon: "🍺", title: "Hostel Happy Hour", desc: "17:00 at the bar · Meet other guests", action: "Remind me" },
+      ],
+      social_half: [
+        { icon: "🎭", title: "Carnival Parade", desc: "Starts 20:00 · Rúa parade route", action: "Schedule" },
+        { icon: "🍻", title: "La Ranilla bars", desc: "Best bars in the old town", action: "Map" },
+      ],
+      social_full: [
+        { icon: "🎭", title: "Santa Cruz Carnival", desc: "Full day trip · Best carnival in Spain", action: "Shuttle info" },
+        { icon: "🎉", title: "Hostel Bar Night", desc: "Back by midnight for the bar", action: "Remind me" },
+      ],
+      explore_2h: [
+        { icon: "🏘️", title: "La Ranilla", desc: "Old town quarter · 10 min walk", action: "Map" },
+        { icon: "🖼️", title: "Plaza del Charco", desc: "Main square & harbor", action: "Map" },
+      ],
+      explore_half: [
+        { icon: "🏘️", title: "Puerto de la Cruz old town", desc: "La Ranilla, markets, churches", action: "Map" },
+        { icon: "🌺", title: "Loro Parque", desc: "Famous animal & plant park", action: "Book tickets" },
+      ],
+      explore_full: [
+        { icon: "🌺", title: "Loro Parque", desc: "Morning visit", action: "Book tickets" },
+        { icon: "🏘️", title: "La Orotava", desc: "Nearby historic town", action: "Bus info" },
+        { icon: "🌊", title: "Los Gigantes cliffs", desc: "Dramatic cliffs by boat", action: "Book tour" },
+      ],
+      airport_bus: [
+        { icon: "🚌", title: "Bus 343 to TFS", desc: "From Intercambiador · ~2h · €15", action: "Timetable" },
+        { icon: "🚌", title: "Bus 102 to TFN", desc: "Via Santa Cruz · ~1.5h · €9", action: "Timetable" },
+      ],
+      airport_taxi: [
+        { icon: "🚕", title: "Taxi to TFS", desc: "~45 min · ~€60-80 · Book in advance", action: "Call reception" },
+        { icon: "🚕", title: "Taxi to TFN", desc: "~35 min · ~€35-45", action: "Call reception" },
+      ],
+      santa_cruz_bus: [
+        { icon: "🚌", title: "Bus 101/103", desc: "From Intercambiador · Every 30 min · €4", action: "Timetable" },
+      ],
+      santa_cruz_taxi: [
+        { icon: "🚕", title: "Taxi to Santa Cruz", desc: "~30 min · ~€25-35", action: "Call reception" },
+      ],
+      beaches_bus: [
+        { icon: "🚌", title: "Bus to Playa Bollullo", desc: "Bus 101 + 10 min walk · €2", action: "Timetable" },
+        { icon: "🚌", title: "Bus to Los Teresitas", desc: "Via Santa Cruz · €4", action: "Timetable" },
+      ],
+      dinner_5min: [
+        { icon: "🍽️", title: "Tasca El Coto", desc: "Traditional Canarian tapas", action: "Location" },
+        { icon: "🍽️", title: "La Creperie", desc: "Crepes & salads · great views", action: "Location" },
+      ],
+      dinner_15min: [
+        { icon: "🍽️", title: "Régulo", desc: "Historic restaurant in old house", action: "Location" },
+        { icon: "🍽️", title: "El Limón", desc: "Fresh fish & seafood", action: "Location" },
+      ],
+      casual_5min: [
+        { icon: "🍕", title: "Café Rambla", desc: "Quick meals & sandwiches", action: "Location" },
+      ],
+      bar_5min: [
+        { icon: "🍺", title: "La Cervecería", desc: "Local craft beers · Plaza", action: "Location" },
+        { icon: "🍹", title: "Mojo Bar", desc: "Cocktails & music", action: "Location" },
+      ],
+      breakfast_5min: [
+        { icon: "☕", title: "Café Dinámico", desc: "Best coffee in town · 07:00", action: "Location" },
+      ],
+      key: [
+        { icon: "🔑", title: "Contact reception", desc: "We'll sort it immediately", action: "Call now" },
+        { icon: "📍", title: "Reception desk", desc: "Ground floor · 24h service", action: "Map" },
+      ],
+      medical: [
+        { icon: "🏥", title: "Hospital Universitario", desc: "Closest emergency · 10 min taxi", action: "Call taxi" },
+        { icon: "💊", title: "Farmacia Central", desc: "5 min walk · Until 22:00", action: "Location" },
+        { icon: "🚨", title: "Emergency: 112", desc: "Spain emergency number", action: "Call 112" },
+      ],
+      luggage: [
+        { icon: "💼", title: "Luggage storage", desc: "Leave bags at reception · Free", action: "Confirm with staff" },
+      ],
+      noise: [
+        { icon: "🔇", title: "Quiet hours", desc: "22:00–08:00 · Please keep noise down", action: "Understood" },
+        { icon: "📞", title: "Report to reception", desc: "We'll handle it", action: "Call reception" },
+      ],
+      staff: [
+        { icon: "📞", title: "Call reception", desc: "Available 24/7", action: "Call now" },
+        { icon: "💬", title: "Chat with us", desc: "Use the chat button", action: "Open chat" },
+      ],
     },
     chat: {
       placeholder: "Type your question...",
       send: "Send",
       typing: "Thinking...",
-    },
-    suggestions: {
-      title: "Quick questions:",
-      items: [
-        "What time is check-in?",
-        "What's the WiFi password?",
-        "Where can I eat nearby?",
-        "Are there any excursions?",
-      ],
+      title: "Chat with Reception",
+      open: "Chat",
     },
     language: {
       toggle: "Español",
@@ -80,6 +312,14 @@ export const translations = {
       generic: "Something went wrong. Please try again.",
       network: "Unable to connect. Please check your connection.",
     },
+    common: {
+      back: "Back",
+      close: "Close",
+      moreInfo: "More Info",
+      getDirections: "Get Directions",
+      save: "Save",
+      askAssistant: "Ask Assistant",
+    },
   },
   es: {
     welcome: {
@@ -87,41 +327,273 @@ export const translations = {
       subtitle: "Tu asistente virtual del hostel",
       description: "Pregúntame sobre el hostel, WiFi, check-in, excursiones y más",
     },
-    actionCards: {
-      nestPass: {
-        title: "Nest Pass",
-        description: "Viaja entre Nest Hostels a precio especial",
-      },
+    greeting: {
+      morning: "Buenos días",
+      afternoon: "Buenas tardes",
+      evening: "Buenas noches",
+    },
+    statusPanel: {
+      weather: "22°C · Soleado",
+      eventToday: "Semana de Carnaval 🎭",
+      quickHelp: "Ayuda Rápida",
+      nightsLeft: (n: number) => n === 1 ? "1 noche restante" : `${n} noches restantes`,
+    },
+    quickActions: {
+      planDay: "Planear mi Día",
+      hostelInfo: "Info del Hostel",
+      eventsToday: "Eventos Hoy",
+      transport: "Transporte",
+      eatOut: "Comer y Salir",
+      needHelp: "Necesito Ayuda",
+    },
+    feed: {
+      title: "Hoy en el Hostel",
       carnival: {
-        title: "Carnaval",
-        description: "Fiestas, desfiles, eventos",
+        title: "🎭 Carnaval 2025",
+        subtitle: "Santa Cruz y Puerto de la Cruz",
+        preview: "Dos grandes carnavales en marcha",
+        santaCruz: "🎭🎉 Santa Cruz de Tenerife",
+        santaCruzDesc: "El carnaval más grande de España — desfiles, disfraces y fiestas callejeras cada noche.",
+        puertoCruz: "🎭🎉 Puerto de la Cruz",
+        puertoCruzDesc: "Carnaval local encantador con música tradicional, rondallas y celebraciones de barrio.",
+        shuttle: "Shuttle a Santa Cruz",
+        moreInfo: "Más Info",
+      },
+      nestPass: {
+        title: "🏷️ Nest Pass",
+        subtitle: "Ahorra hasta un 30%",
+        preview: "Quédate en varios Nest Hostels",
+        description: "Muévete entre Nest Hostels en Tenerife y Gran Canaria a precio especial. Mínimo 7 noches.",
+        simulate: "Calcular mi Ahorro",
+        learnMore: "Saber Más",
+      },
+      hostelToday: {
+        title: "🏠 Hostel Hoy",
+        subtitle: "Actividades e info",
+        preview: "Ver qué hay hoy",
+      },
+      eatRecommended: {
+        title: "🍽️ Dónde Comer",
+        subtitle: "Favoritos del equipo",
+        preview: "Nuestros sitios favoritos",
+      },
+    },
+    flows: {
+      planDay: {
+        title: "Planear mi Día",
+        step1: {
+          question: "¿Qué te apetece hoy?",
+          options: [
+            { label: "🌴 Relax", value: "relax" },
+            { label: "🏔️ Naturaleza", value: "nature" },
+            { label: "🎉 Social", value: "social" },
+            { label: "🗺️ Explorar", value: "explore" },
+          ],
+        },
+        step2: {
+          question: "¿Cuánto tiempo tienes?",
+          options: [
+            { label: "⚡ 2 horas", value: "2h" },
+            { label: "🌅 Medio día", value: "half" },
+            { label: "☀️ Día completo", value: "full" },
+          ],
+        },
       },
       hostelInfo: {
         title: "Info del Hostel",
-        description: "Check-in, reglas, reservas",
+        step1: {
+          question: "¿Qué necesitas saber?",
+          options: [
+            { label: "🕐 Check-in / Check-out", value: "check_in_out" },
+            { label: "📋 Reglas de la Casa", value: "house_rules" },
+            { label: "📶 WiFi", value: "wifi" },
+            { label: "🍳 Cocina", value: "kitchen" },
+            { label: "👕 Lavandería", value: "laundry" },
+          ],
+        },
       },
-      excursions: {
-        title: "Excursiones y Actividades",
-        description: "Tours, playas, actividades",
+      events: {
+        title: "Eventos Hoy",
       },
       transport: {
         title: "Transporte",
-        description: "Aeropuertos, buses, taxis",
+        step1: {
+          question: "¿A dónde quieres ir?",
+          options: [
+            { label: "✈️ Aeropuerto (TFN/TFS)", value: "airport" },
+            { label: "🚌 Estación de Buses", value: "bus_station" },
+            { label: "🌆 Santa Cruz", value: "santa_cruz" },
+            { label: "🏖️ Playas", value: "beaches" },
+            { label: "⛰️ Teide", value: "teide" },
+          ],
+        },
+        step2: {
+          question: "¿Cómo prefieres viajar?",
+          options: [
+            { label: "🚌 Bus", value: "bus" },
+            { label: "🚕 Taxi / Uber", value: "taxi" },
+            { label: "🛵 Alquiler", value: "rental" },
+          ],
+        },
       },
+      eatOut: {
+        title: "Comer y Salir",
+        step1: {
+          question: "¿Qué estás buscando?",
+          options: [
+            { label: "🍽️ Cena sentado", value: "dinner" },
+            { label: "🍕 Rápido y casual", value: "casual" },
+            { label: "🍺 Bares y copas", value: "bar" },
+            { label: "🌅 Desayuno / Brunch", value: "breakfast" },
+          ],
+        },
+        step2: {
+          question: "¿Cuánto estás dispuesto a caminar?",
+          options: [
+            { label: "🚶 5 min", value: "5min" },
+            { label: "🚶‍♂️ 15 min", value: "15min" },
+            { label: "🚌 Coger bus", value: "bus" },
+          ],
+        },
+      },
+      needHelp: {
+        title: "Necesito Ayuda",
+        step1: {
+          question: "¿Con qué necesitas ayuda?",
+          options: [
+            { label: "🔑 Llave perdida / acceso", value: "key" },
+            { label: "🏥 Médico / Emergencia", value: "medical" },
+            { label: "💼 Guardar equipaje", value: "luggage" },
+            { label: "🔇 Queja de ruido", value: "noise" },
+            { label: "💬 Hablar con recepción", value: "staff" },
+          ],
+        },
+      },
+    },
+    nestPassSimulator: {
+      title: "Calculadora de Ahorro Nest Pass",
+      description: "¿Cuántas noches planeas quedarte en los Nest Hostels?",
+      nights: "Noches",
+      standardPrice: "Precio estándar",
+      withPass: "Con Nest Pass",
+      youSave: "Ahorras",
+      cta: "Preguntar sobre el Nest Pass",
+    },
+    results: {
+      relax_2h: [
+        { icon: "🌊", title: "Playa Jardín", desc: "5 min andando · Playa de arena negra volcánica", action: "Cómo llegar" },
+        { icon: "☕", title: "Café La Ranilla", desc: "10 min andando · Cafetería local acogedora", action: "Ver ubicación" },
+      ],
+      relax_half: [
+        { icon: "🌊", title: "Playa Jardín", desc: "5 min andando · Relax toda la mañana", action: "Cómo llegar" },
+        { icon: "🌿", title: "Jardín Botánico", desc: "15 min en bus · Jardines preciosos", action: "Info del bus" },
+        { icon: "☕", title: "Barrio La Ranilla", desc: "Explora el casco viejo a tu ritmo", action: "Mapa" },
+      ],
+      relax_full: [
+        { icon: "🌊", title: "Playa Jardín", desc: "Baño por la mañana", action: "Cómo llegar" },
+        { icon: "🌿", title: "Jardín Botánico", desc: "Paseo por la tarde", action: "Info del bus" },
+        { icon: "🌅", title: "Atardecer en el muelle", desc: "Paseo y cena por la noche", action: "Mapa" },
+      ],
+      nature_2h: [
+        { icon: "🌊", title: "Playa Bollullo", desc: "30 min en bus · Playa natural apartada", action: "Cómo llegar" },
+        { icon: "🦎", title: "Sendero costero", desc: "Paseo por la costa volcánica", action: "Mapa del sendero" },
+      ],
+      nature_half: [
+        { icon: "🏔️", title: "Valle de La Orotava", desc: "45 min en bus · Vistas espectaculares", action: "Info del bus" },
+        { icon: "🌲", title: "Corona Forestal", desc: "Senderismo en laurisilva", action: "Mapa del sendero" },
+      ],
+      nature_full: [
+        { icon: "🌋", title: "El Teide", desc: "Excursión de día completo · Reserva el teleférico", action: "Reservar" },
+        { icon: "🐋", title: "Avistamiento de ballenas", desc: "Costa sur · Salida por la tarde", action: "Reservar" },
+      ],
+      social_2h: [
+        { icon: "🎭", title: "Carnaval en la plaza", desc: "Empieza en la Plaza del Charco", action: "Mapa" },
+        { icon: "🍺", title: "Happy Hour del Hostel", desc: "17:00 en el bar · Conoce a otros huéspedes", action: "Recuérdame" },
+      ],
+      social_half: [
+        { icon: "🎭", title: "Desfile de Carnaval", desc: "Empieza a las 20:00 · Ruta de la Rúa", action: "Horario" },
+        { icon: "🍻", title: "Bares de La Ranilla", desc: "Los mejores bares del casco viejo", action: "Mapa" },
+      ],
+      social_full: [
+        { icon: "🎭", title: "Carnaval de Santa Cruz", desc: "Excursión de día · El mejor carnaval de España", action: "Info del shuttle" },
+        { icon: "🎉", title: "Noche en el bar del hostel", desc: "De vuelta a medianoche para el bar", action: "Recuérdame" },
+      ],
+      explore_2h: [
+        { icon: "🏘️", title: "La Ranilla", desc: "Barrio histórico · 10 min andando", action: "Mapa" },
+        { icon: "🖼️", title: "Plaza del Charco", desc: "Plaza principal y puerto", action: "Mapa" },
+      ],
+      explore_half: [
+        { icon: "🏘️", title: "Casco viejo de Puerto Cruz", desc: "La Ranilla, mercados, iglesias", action: "Mapa" },
+        { icon: "🌺", title: "Loro Parque", desc: "Parque de animales y plantas", action: "Comprar entradas" },
+      ],
+      explore_full: [
+        { icon: "🌺", title: "Loro Parque", desc: "Visita por la mañana", action: "Comprar entradas" },
+        { icon: "🏘️", title: "La Orotava", desc: "Pueblo histórico cercano", action: "Info del bus" },
+        { icon: "🌊", title: "Acantilados de Los Gigantes", desc: "Acantilados dramáticos en barco", action: "Reservar tour" },
+      ],
+      airport_bus: [
+        { icon: "🚌", title: "Bus 343 a TFS", desc: "Desde el Intercambiador · ~2h · €15", action: "Horarios" },
+        { icon: "🚌", title: "Bus 102 a TFN", desc: "Por Santa Cruz · ~1.5h · €9", action: "Horarios" },
+      ],
+      airport_taxi: [
+        { icon: "🚕", title: "Taxi a TFS", desc: "~45 min · ~€60-80 · Reservar con antelación", action: "Llamar recepción" },
+        { icon: "🚕", title: "Taxi a TFN", desc: "~35 min · ~€35-45", action: "Llamar recepción" },
+      ],
+      santa_cruz_bus: [
+        { icon: "🚌", title: "Bus 101/103", desc: "Desde el Intercambiador · Cada 30 min · €4", action: "Horarios" },
+      ],
+      santa_cruz_taxi: [
+        { icon: "🚕", title: "Taxi a Santa Cruz", desc: "~30 min · ~€25-35", action: "Llamar recepción" },
+      ],
+      beaches_bus: [
+        { icon: "🚌", title: "Bus a Playa Bollullo", desc: "Bus 101 + 10 min andando · €2", action: "Horarios" },
+        { icon: "🚌", title: "Bus a Los Teresitas", desc: "Por Santa Cruz · €4", action: "Horarios" },
+      ],
+      dinner_5min: [
+        { icon: "🍽️", title: "Tasca El Coto", desc: "Tapas canarias tradicionales", action: "Ubicación" },
+        { icon: "🍽️", title: "La Creperie", desc: "Crepes y ensaladas · buenas vistas", action: "Ubicación" },
+      ],
+      dinner_15min: [
+        { icon: "🍽️", title: "Régulo", desc: "Restaurante histórico en casa antigua", action: "Ubicación" },
+        { icon: "🍽️", title: "El Limón", desc: "Pescado fresco y marisco", action: "Ubicación" },
+      ],
+      casual_5min: [
+        { icon: "🍕", title: "Café Rambla", desc: "Comidas rápidas y bocadillos", action: "Ubicación" },
+      ],
+      bar_5min: [
+        { icon: "🍺", title: "La Cervecería", desc: "Cervezas artesanas locales · Plaza", action: "Ubicación" },
+        { icon: "🍹", title: "Mojo Bar", desc: "Cócteles y música", action: "Ubicación" },
+      ],
+      breakfast_5min: [
+        { icon: "☕", title: "Café Dinámico", desc: "El mejor café del pueblo · desde las 07:00", action: "Ubicación" },
+      ],
+      key: [
+        { icon: "🔑", title: "Contactar recepción", desc: "Lo solucionamos enseguida", action: "Llamar ahora" },
+        { icon: "📍", title: "Mostrador de recepción", desc: "Planta baja · Servicio 24h", action: "Mapa" },
+      ],
+      medical: [
+        { icon: "🏥", title: "Hospital Universitario", desc: "Urgencias más cercanas · 10 min en taxi", action: "Llamar taxi" },
+        { icon: "💊", title: "Farmacia Central", desc: "5 min andando · Hasta las 22:00", action: "Ubicación" },
+        { icon: "🚨", title: "Emergencias: 112", desc: "Número de emergencias España", action: "Llamar 112" },
+      ],
+      luggage: [
+        { icon: "💼", title: "Consigna de equipaje", desc: "Deja las maletas en recepción · Gratis", action: "Confirmar con staff" },
+      ],
+      noise: [
+        { icon: "🔇", title: "Horario de silencio", desc: "22:00–08:00 · Por favor mantén el silencio", action: "Entendido" },
+        { icon: "📞", title: "Avisar a recepción", desc: "Nos encargamos", action: "Llamar recepción" },
+      ],
+      staff: [
+        { icon: "📞", title: "Llamar a recepción", desc: "Disponible 24/7", action: "Llamar ahora" },
+        { icon: "💬", title: "Chatear con nosotros", desc: "Usa el botón de chat", action: "Abrir chat" },
+      ],
     },
     chat: {
       placeholder: "Escribe tu pregunta...",
       send: "Enviar",
       typing: "Pensando...",
-    },
-    suggestions: {
-      title: "Preguntas rápidas:",
-      items: [
-        "¿A qué hora es el check-in?",
-        "¿Cuál es la contraseña del WiFi?",
-        "¿Dónde puedo comer cerca?",
-        "¿Hay excursiones disponibles?",
-      ],
+      title: "Chat con Recepción",
+      open: "Chat",
     },
     language: {
       toggle: "English",
@@ -160,9 +632,19 @@ export const translations = {
       generic: "Algo salió mal. Por favor, intenta de nuevo.",
       network: "No se puede conectar. Verifica tu conexión.",
     },
+    common: {
+      back: "Atrás",
+      close: "Cerrar",
+      moreInfo: "Más Info",
+      getDirections: "Cómo Llegar",
+      save: "Guardar",
+      askAssistant: "Preguntar al Asistente",
+    },
   },
 } as const;
 
+export type Translations = typeof translations.en;
+
 export function useTranslations(language: Language) {
-  return translations[language];
+  return translations[language] as unknown as Translations;
 }
