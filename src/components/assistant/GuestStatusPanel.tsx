@@ -1,5 +1,6 @@
 import { Zap } from "lucide-react";
 import { Translations } from "@/lib/i18n";
+import { useWeather } from "@/hooks/useWeather";
 
 interface GuestStatusPanelProps {
   t: Translations;
@@ -15,6 +16,13 @@ function getGreeting(t: Translations): string {
 
 export function GuestStatusPanel({ t, onQuickHelp }: GuestStatusPanelProps) {
   const greeting = getGreeting(t);
+  const weather = useWeather();
+
+  const weatherLabel = weather.loading
+    ? null
+    : weather.data
+    ? `${weather.data.emoji} ${weather.data.temperature}°C · ${weather.data.description}`
+    : t.statusPanel.weather;
 
   return (
     <div className="welcome-gradient text-primary-foreground px-4 pt-20 pb-6">
@@ -25,8 +33,11 @@ export function GuestStatusPanel({ t, onQuickHelp }: GuestStatusPanelProps) {
         {/* Status row */}
         <div className="flex items-center gap-3 mb-4">
           <div className="flex items-center gap-1.5 bg-white/15 rounded-full px-3 py-1.5">
-            <span className="text-sm">☀️</span>
-            <span className="text-sm font-medium">{t.statusPanel.weather}</span>
+            {weather.loading ? (
+              <div className="h-4 w-24 rounded-full bg-white/20 animate-pulse" />
+            ) : (
+              <span className="text-sm font-medium">{weatherLabel}</span>
+            )}
           </div>
           <div className="flex items-center gap-1.5 bg-white/15 rounded-full px-3 py-1.5">
             <span className="text-sm font-medium">{t.statusPanel.eventToday}</span>
@@ -45,3 +56,4 @@ export function GuestStatusPanel({ t, onQuickHelp }: GuestStatusPanelProps) {
     </div>
   );
 }
+
