@@ -9,18 +9,50 @@ export interface ChatMessage {
 }
 
 const CHAT_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/chat`;
+const SESSION_KEY = "puerto_nest_chat_history";
+
+// ── Persistence helpers ────────────────────────────────────────────────────────
+
+function loadMessages(): ChatMessage[] {
+  try {
+    const raw = sessionStorage.getItem(SESSION_KEY);
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return parsed.map((m: ChatMessage) => ({ ...m, timestamp: new Date(m.timestamp) }));
+  } catch {
+    return [];
+  }
+}
+
+function saveMessages(messages: ChatMessage[]) {
+  try {
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify(messages));
+  } catch { /* ignore */ }
+}
+
+function clearStoredMessages() {
+  try { sessionStorage.removeItem(SESSION_KEY); } catch { /* ignore */ }
+}
+
+// ── Hook ──────────────────────────────────────────────────────────────────────
 
 export function useChat(language: Language) {
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [messages, setMessages] = useState<ChatMessage[]>(loadMessages);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
+
+  const messagesRef = useRef<ChatMessage[]>(messages);
+  useEffect(() => {
+    messagesRef.current = messages;
+    saveMessages(messages);
+  }, [messages]);
 
   const sendMessage = useCallback(async (content: string) => {
     if (!content.trim() || isLoading) return;
 
     setError(null);
-    
+
     const userMessage: ChatMessage = {
       id: crypto.randomUUID(),
       role: "user",
@@ -28,17 +60,17 @@ export function useChat(language: Language) {
       timestamp: new Date(),
     };
 
-    setMessages((prev) => [...prev, userMessage]);
+    const updatedMessages = [...messagesRef.current, userMessage];
+    setMessages(updatedMessages);
     setIsLoading(true);
 
-    // Cancel any previous request
     if (abortControllerRef.current) {
       abortControllerRef.current.abort();
     }
     abortControllerRef.current = new AbortController();
 
     try {
-      const messagesToSend = [...messages, userMessage].map((m) => ({
+      const messagesToSend = updatedMessages.map((m) => ({
         role: m.role,
         content: m.content,
       }));
@@ -67,7 +99,6 @@ export function useChat(language: Language) {
       let assistantContent = "";
       const assistantId = crypto.randomUUID();
 
-      // Add empty assistant message that we'll update
       setMessages((prev) => [
         ...prev,
         {
@@ -110,14 +141,12 @@ export function useChat(language: Language) {
               );
             }
           } catch {
-            // Incomplete JSON, put it back
             textBuffer = line + "\n" + textBuffer;
             break;
           }
         }
       }
 
-      // Final flush
       if (textBuffer.trim()) {
         for (let raw of textBuffer.split("\n")) {
           if (!raw) continue;
@@ -151,14 +180,14 @@ export function useChat(language: Language) {
     } finally {
       setIsLoading(false);
     }
-  }, [messages, isLoading, language]);
+  }, [isLoading, language]);
 
   const clearMessages = useCallback(() => {
     setMessages([]);
     setError(null);
+    clearStoredMessages();
   }, []);
 
-  // Cleanup on unmount
   useEffect(() => {
     return () => {
       if (abortControllerRef.current) {
