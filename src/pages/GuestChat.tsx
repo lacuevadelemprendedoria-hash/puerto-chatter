@@ -80,6 +80,7 @@ export default function GuestChat() {
         {/* Status panel with gradient header */}
         <GuestStatusPanel
           t={t}
+          language={language}
           onQuickHelp={() => handleOpenFlow("needHelp")}
         />
 
