@@ -88,7 +88,7 @@ export default function GuestChat() {
         <QuickActionsBar t={t} onAction={handleOpenFlow} />
 
         {/* Activity feed */}
-        <ActivityFeed t={t} language={language} onOpenChat={handleOpenChat} />
+        <ActivityFeed language={language} onOpenChat={handleOpenChat} />
       </div>
 
       {/* Floating chat button */}

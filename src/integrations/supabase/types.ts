@@ -148,6 +148,69 @@ export type Database = {
         }
         Relationships: []
       }
+      feed_items: {
+        Row: {
+          created_at: string
+          cta_action: string | null
+          cta_label_en: string | null
+          cta_label_es: string | null
+          description_en: string | null
+          description_es: string | null
+          emoji: string | null
+          ends_at: string | null
+          id: string
+          is_active: boolean
+          sort_order: number
+          starts_at: string | null
+          subtitle_en: string | null
+          subtitle_es: string | null
+          title_en: string
+          title_es: string
+          type: Database["public"]["Enums"]["feed_item_type"]
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          cta_action?: string | null
+          cta_label_en?: string | null
+          cta_label_es?: string | null
+          description_en?: string | null
+          description_es?: string | null
+          emoji?: string | null
+          ends_at?: string | null
+          id?: string
+          is_active?: boolean
+          sort_order?: number
+          starts_at?: string | null
+          subtitle_en?: string | null
+          subtitle_es?: string | null
+          title_en: string
+          title_es: string
+          type?: Database["public"]["Enums"]["feed_item_type"]
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          cta_action?: string | null
+          cta_label_en?: string | null
+          cta_label_es?: string | null
+          description_en?: string | null
+          description_es?: string | null
+          emoji?: string | null
+          ends_at?: string | null
+          id?: string
+          is_active?: boolean
+          sort_order?: number
+          starts_at?: string | null
+          subtitle_en?: string | null
+          subtitle_es?: string | null
+          title_en?: string
+          title_es?: string
+          type?: Database["public"]["Enums"]["feed_item_type"]
+          updated_at?: string
+        }
+        Relationships: []
+      }
       hostel_content: {
         Row: {
           category: Database["public"]["Enums"]["content_category"]
@@ -205,6 +268,7 @@ export type Database = {
         | "transport"
         | "excursions"
         | "where_to_eat_go_out"
+      feed_item_type: "event" | "restaurant" | "hostel_activity" | "banner"
       supported_language: "en" | "es"
     }
     CompositeTypes: {
@@ -343,6 +407,7 @@ export const Constants = {
         "excursions",
         "where_to_eat_go_out",
       ],
+      feed_item_type: ["event", "restaurant", "hostel_activity", "banner"],
       supported_language: ["en", "es"],
     },
   },
