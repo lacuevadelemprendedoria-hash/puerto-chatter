@@ -118,6 +118,7 @@ export default function GuestChat() {
         isLoading={isLoading}
         onSend={sendMessage}
         t={t}
+        language={language}
       />
     </div>
   );
