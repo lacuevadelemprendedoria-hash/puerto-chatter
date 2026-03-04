@@ -1,9 +1,10 @@
 import { Zap } from "lucide-react";
-import { Translations } from "@/lib/i18n";
+import { Translations, Language } from "@/lib/i18n";
 import { useWeather } from "@/hooks/useWeather";
 
 interface GuestStatusPanelProps {
   t: Translations;
+  language: Language;
   onQuickHelp: () => void;
 }
 
@@ -14,9 +15,9 @@ function getGreeting(t: Translations): string {
   return t.greeting.evening;
 }
 
-export function GuestStatusPanel({ t, onQuickHelp }: GuestStatusPanelProps) {
+export function GuestStatusPanel({ t, language, onQuickHelp }: GuestStatusPanelProps) {
   const greeting = getGreeting(t);
-  const weather = useWeather();
+  const weather = useWeather(language);
 
   const weatherLabel = weather.loading
     ? null
