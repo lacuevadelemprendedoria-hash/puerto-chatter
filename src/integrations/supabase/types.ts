@@ -211,6 +211,36 @@ export type Database = {
         }
         Relationships: []
       }
+      hostel_config: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          key: string
+          label: string | null
+          updated_at: string
+          value: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          key: string
+          label?: string | null
+          updated_at?: string
+          value: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          key?: string
+          label?: string | null
+          updated_at?: string
+          value?: string
+        }
+        Relationships: []
+      }
       hostel_content: {
         Row: {
           category: Database["public"]["Enums"]["content_category"]

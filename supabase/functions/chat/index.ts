@@ -6,7 +6,7 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-supabase-client-platform, x-supabase-client-platform-version, x-supabase-client-runtime, x-supabase-client-runtime-version",
 };
 
-const SYSTEM_PROMPT = `You are a friendly hostel reception assistant at Puerto Nest Hostel. Your name is "Nest Assistant" 🏠
+const SYSTEM_PROMPT = `You are a friendly hostel reception assistant at {hostel_name}. Your name is "Nest Assistant" 🏠
 
 GREETING RULES (VERY IMPORTANT):
 - ONLY greet and introduce yourself in your FIRST message of the conversation
@@ -69,6 +69,15 @@ serve(async (req) => {
     const supabaseKey = Deno.env.get("SUPABASE_ANON_KEY")!;
     const supabase = createClient(supabaseUrl, supabaseKey);
 
+    // Fetch hostel name from config table
+    const { data: configData } = await supabase
+      .from("hostel_config")
+      .select("value")
+      .eq("key", "hostel_name")
+      .maybeSingle();
+
+    const hostelName = configData?.value || "Puerto Nest Hostel";
+
     // Fetch all active hostel content in both languages
     const { data: contentData, error: contentError } = await supabase
       .from("hostel_content")
@@ -122,7 +131,9 @@ serve(async (req) => {
       formattedContent = "No hostel information has been configured yet. / No hay información del hostel configurada todavía.";
     }
 
-    const systemPrompt = SYSTEM_PROMPT.replace("{content}", formattedContent);
+    const systemPrompt = SYSTEM_PROMPT
+      .replace("{hostel_name}", hostelName)
+      .replace("{content}", formattedContent);
 
     console.log("Sending request to AI with", messages.length, "messages");
 
