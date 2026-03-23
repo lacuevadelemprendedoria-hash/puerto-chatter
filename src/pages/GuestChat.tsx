@@ -1,6 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
-import { Link } from "react-router-dom";
-import { Settings, MessageCircle, Globe } from "lucide-react";
+
+import { MessageCircle, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { GuestStatusPanel } from "@/components/assistant/GuestStatusPanel";
 import { QuickActionsBar } from "@/components/assistant/QuickActionsBar";
@@ -81,11 +81,6 @@ export default function GuestChat() {
               </div>
             )}
           </div>
-          <Link to="/admin">
-            <Button variant="ghost" size="icon" className="text-primary-foreground/80 hover:text-primary-foreground hover:bg-white/10">
-              <Settings className="w-5 h-5" />
-            </Button>
-          </Link>
         </div>
       </header>
 
