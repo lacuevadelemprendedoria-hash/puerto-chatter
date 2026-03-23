@@ -221,8 +221,8 @@ serve(async (req) => {
   try {
     const { messages, language = "en" } = await req.json();
 
-    const ANTHROPIC_API_KEY = Deno.env.get("ANTHROPIC_API_KEY");
-    if (!ANTHROPIC_API_KEY) throw new Error("ANTHROPIC_API_KEY is not configured");
+    const LOVABLE_API_KEY = Deno.env.get("LOVABLE_API_KEY");
+    if (!LOVABLE_API_KEY) throw new Error("LOVABLE_API_KEY is not configured");
 
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const supabaseKey = Deno.env.get("SUPABASE_ANON_KEY")!;
@@ -246,73 +246,41 @@ serve(async (req) => {
       ? SYSTEM_PROMPT + "\n\n=== UPDATES FROM ADMIN PANEL (take priority over above) ===\n" + extraContent
       : SYSTEM_PROMPT;
 
-    const anthropicMessages = messages.map((m: { role: string; content: string }) => ({
-      role: m.role as "user" | "assistant",
-      content: m.content,
-    }));
+    const gatewayMessages = [
+      { role: "system", content: finalSystemPrompt },
+      ...messages.map((m: { role: string; content: string }) => ({
+        role: m.role,
+        content: m.content,
+      })),
+    ];
 
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
+    const response = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
       method: "POST",
       headers: {
-        "x-api-key": ANTHROPIC_API_KEY,
-        "anthropic-version": "2023-06-01",
-        "content-type": "application/json",
+        Authorization: `Bearer ${LOVABLE_API_KEY}`,
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        model: "claude-sonnet-4-5",
-        max_tokens: 1024,
-        system: finalSystemPrompt,
-        messages: anthropicMessages,
+        model: "google/gemini-2.5-flash",
+        messages: gatewayMessages,
         stream: true,
       }),
     });
 
     if (!response.ok) {
       const errorText = await response.text();
-      console.error("Anthropic API error:", response.status, errorText);
+      console.error("AI gateway error:", response.status, errorText);
       if (response.status === 429) {
         return new Response(JSON.stringify({ error: "Rate limit exceeded. Please try again." }), { status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+      }
+      if (response.status === 402) {
+        return new Response(JSON.stringify({ error: "AI credits exhausted. Please add funds." }), { status: 402, headers: { ...corsHeaders, "Content-Type": "application/json" } });
       }
       return new Response(JSON.stringify({ error: "Unable to process your request." }), { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } });
     }
 
-    const encoder = new TextEncoder();
-    const reader = response.body!.getReader();
-    const decoder = new TextDecoder();
-
-    const transformedStream = new ReadableStream({
-      async start(controller) {
-        let buffer = "";
-        try {
-          while (true) {
-            const { done, value } = await reader.read();
-            if (done) break;
-            buffer += decoder.decode(value, { stream: true });
-            let newlineIndex: number;
-            while ((newlineIndex = buffer.indexOf("\n")) !== -1) {
-              let line = buffer.slice(0, newlineIndex);
-              buffer = buffer.slice(newlineIndex + 1);
-              if (line.endsWith("\r")) line = line.slice(0, -1);
-              if (line.startsWith(":") || line.trim() === "") continue;
-              if (!line.startsWith("data: ")) continue;
-              const jsonStr = line.slice(6).trim();
-              if (jsonStr === "[DONE]") { controller.enqueue(encoder.encode("data: [DONE]\n\n")); break; }
-              try {
-                const parsed = JSON.parse(jsonStr);
-                if (parsed.type === "content_block_delta" && parsed.delta?.text) {
-                  controller.enqueue(encoder.encode(`data: ${JSON.stringify({ choices: [{ delta: { content: parsed.delta.text } }] })}\n\n`));
-                } else if (parsed.type === "message_stop") {
-                  controller.enqueue(encoder.encode("data: [DONE]\n\n"));
-                }
-              } catch { /* skip */ }
-            }
-          }
-        } catch (err) { console.error("Stream error:", err); }
-        finally { controller.close(); }
-      },
-    });
-
-    return new Response(transformedStream, { headers: { ...corsHeaders, "Content-Type": "text/event-stream" } });
+    // Gateway returns OpenAI-compatible SSE — pass through directly
+    return new Response(response.body, { headers: { ...corsHeaders, "Content-Type": "text/event-stream" } });
   } catch (error) {
     console.error("Chat error:", error);
     return new Response(JSON.stringify({ error: error instanceof Error ? error.message : "Unknown error" }), { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } });
