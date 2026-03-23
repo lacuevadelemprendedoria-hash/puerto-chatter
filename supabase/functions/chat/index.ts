@@ -249,9 +249,14 @@ serve(async (req) => {
       }
     }
 
-    const finalSystemPrompt = extraContent
+    let finalSystemPrompt = extraContent
       ? SYSTEM_PROMPT + "\n\n=== UPDATES FROM ADMIN PANEL (take priority over above) ===\n" + extraContent
       : SYSTEM_PROMPT;
+
+    // Add language hint based on interface language
+    if (language === "es") {
+      finalSystemPrompt = "IMPORTANT: The guest is using the Spanish interface. If they write in Spanish, respond entirely in Spanish.\n\n" + finalSystemPrompt;
+    }
 
     const gatewayMessages = [
       { role: "system", content: finalSystemPrompt },

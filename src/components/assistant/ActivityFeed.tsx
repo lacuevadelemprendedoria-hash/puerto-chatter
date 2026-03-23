@@ -61,7 +61,12 @@ export function ActivityFeed({ language, onOpenChat }: ActivityFeedProps) {
       window.open(action, "_blank", "noopener,noreferrer");
       return;
     }
-    onOpenChat(action);
+    // Use the localized title as the chat query context
+    const title = getText(item, "title", language);
+    const query = language === "es"
+      ? `Cuéntame más sobre "${title}"`
+      : `Tell me more about "${title}"`;
+    onOpenChat(query);
   };
 
   const feedTitle = language === "es" ? "Hoy en el Hostel" : "Today at the Hostel";
