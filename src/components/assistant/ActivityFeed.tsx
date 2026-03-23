@@ -118,7 +118,8 @@ export function ActivityFeed({ language, onOpenChat }: ActivityFeedProps) {
                   <div className="flex items-center gap-2">
                     <span className="font-bold text-foreground truncate">{title}</span>
                     {item.type === "event" && (
-                      <span className="bg-accent text-accent-foreground text-xs font-bold px-2 py-0.5 rounded-full shrink-0">
+                      <span className="text-xs font-bold px-2 py-0.5 rounded-full shrink-0 font-heading"
+                        style={{background: '#53CED1', color: '#fff'}}>
                         {language === "es" ? "HOY" : "TODAY"}
                       </span>
                     )}
@@ -143,7 +144,8 @@ export function ActivityFeed({ language, onOpenChat }: ActivityFeedProps) {
                   {ctaLabel && (
                     <button
                       onClick={() => handleCta(item)}
-                      className="mt-4 w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-colors"
+                      className="mt-4 w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-white font-semibold text-sm active:scale-95 transition-all font-heading"
+                      style={{background: 'linear-gradient(to right, #53CED1, #0D6F82)'}}
                     >
                       {ctaLabel}
                       {item.cta_action?.startsWith("http") && <ExternalLink className="w-4 h-4" />}

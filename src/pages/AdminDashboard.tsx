@@ -133,6 +133,7 @@ export default function AdminDashboard() {
           .eq("id", row.id);
         if (error) throw error;
       }
+      // Clear config cache so GuestStatusPanel refreshes
       try { sessionStorage.removeItem("nest_hostel_config"); } catch { /* ignore */ }
       toast({ title: "Config saved", description: "Changes will appear immediately." });
     } catch (err) {
@@ -173,12 +174,12 @@ export default function AdminDashboard() {
       <header className="sticky top-0 z-50 border-b border-border bg-card">
         <div className="container flex items-center justify-between h-16 px-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full welcome-gradient flex items-center justify-center">
-              <Building2 className="w-5 h-5 text-primary-foreground" />
+            <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{background: 'linear-gradient(135deg, #0D6F82, #53CED1)'}}>
+              <Building2 className="w-5 h-5 text-white" />
             </div>
             <div>
-              <h1 className="font-semibold text-foreground">Puerto Nest Admin</h1>
-              <p className="text-xs text-muted-foreground">Content Management</p>
+              <h1 className="font-semibold text-foreground font-heading">Puerto Nest Admin</h1>
+              <p className="text-xs text-muted-foreground font-body">Content Management</p>
             </div>
           </div>
           <Button variant="ghost" onClick={handleLogout} className="gap-2">
@@ -362,17 +363,36 @@ export default function AdminDashboard() {
                           type="text"
                           value={configValues[row.key] ?? ""}
                           onChange={(e) => setConfigValues((prev) => ({ ...prev, [row.key]: e.target.value }))}
-                          className="w-full px-3 py-2 rounded-lg border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring/30"
+                          className="w-full px-3 py-2 rounded-lg border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
                         />
                       </div>
                     ))}
                     {configRows.length === 0 && (
                       <p className="text-center text-muted-foreground py-8">
-                        No configuration found. The hostel_config table may need to be set up.
+                        Run the migration SQL to create the hostel_config table first.
                       </p>
                     )}
                   </div>
                 )}
+              </CardContent>
+            </Card>
+
+            {/* Replication Guide */}
+            <Card className="mt-4">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-base">🔁 Deploy to Another Nest Hostel</CardTitle>
+              </CardHeader>
+              <CardContent className="text-sm text-muted-foreground space-y-2">
+                <p>To deploy this app for a different Nest Hostel:</p>
+                <ol className="list-decimal list-inside space-y-1.5 pl-2">
+                  <li>Fork / duplicate the repo on GitHub</li>
+                  <li>Edit <code className="bg-muted px-1 rounded text-xs">src/lib/hostel.config.ts</code> with the new hostel's details</li>
+                  <li>Replace the logo at <code className="bg-muted px-1 rounded text-xs">src/assets/puerto-nest-logo.png</code></li>
+                  <li>Create a new Supabase project and run all migrations</li>
+                  <li>Set <code className="bg-muted px-1 rounded text-xs">ANTHROPIC_API_KEY</code> in Supabase Edge Function secrets</li>
+                  <li>Update <code className="bg-muted px-1 rounded text-xs">.env</code> with the new Supabase URL and keys</li>
+                  <li>Deploy to Lovable / Vercel / Netlify</li>
+                </ol>
               </CardContent>
             </Card>
           </TabsContent>

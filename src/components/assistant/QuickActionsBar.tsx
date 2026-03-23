@@ -5,34 +5,30 @@ import { cn } from "@/lib/utils";
 
 interface QuickAction {
   id: FlowId;
-  icon: React.ComponentType<{ className?: string }>;
   emoji: string;
-  color: string;
   bgColor: string;
+  textColor: string;
 }
 
+// All using Nests brand palette
 const ACTIONS: QuickAction[] = [
-  { id: "planDay", icon: Calendar, emoji: "🗓️", color: "text-primary", bgColor: "bg-primary/10" },
-  { id: "hostelInfo", icon: Home, emoji: "🏠", color: "text-blue-600", bgColor: "bg-blue-50" },
-  { id: "events", icon: PartyPopper, emoji: "🎉", color: "text-purple-600", bgColor: "bg-purple-50" },
-  { id: "transport", icon: Bus, emoji: "🚌", color: "text-orange-600", bgColor: "bg-orange-50" },
-  { id: "eatOut", icon: UtensilsCrossed, emoji: "🍽️", color: "text-rose-600", bgColor: "bg-rose-50" },
-  { id: "needHelp", icon: LifeBuoy, emoji: "🆘", color: "text-red-600", bgColor: "bg-red-50" },
+  { id: "planDay",    emoji: "🗓️", bgColor: "bg-[#53CED1]/15", textColor: "text-[#0D6F82]" },
+  { id: "hostelInfo", emoji: "🏠", bgColor: "bg-[#53D195]/15", textColor: "text-[#0D6F82]" },
+  { id: "events",     emoji: "🎉", bgColor: "bg-[#E5B853]/15", textColor: "text-[#0D6F82]" },
+  { id: "transport",  emoji: "🚌", bgColor: "bg-[#E37C25]/15", textColor: "text-[#0D6F82]" },
+  { id: "eatOut",     emoji: "🍽️", bgColor: "bg-[#CED153]/15", textColor: "text-[#0D6F82]" },
+  { id: "needHelp",   emoji: "🆘", bgColor: "bg-[#D15653]/15", textColor: "text-[#0D6F82]" },
 ];
+
+const ACTION_LABEL_KEYS: Record<FlowId, keyof Translations["quickActions"]> = {
+  planDay: "planDay", hostelInfo: "hostelInfo", events: "eventsToday",
+  transport: "transport", eatOut: "eatOut", needHelp: "needHelp",
+};
 
 interface QuickActionsBarProps {
   t: Translations;
   onAction: (flowId: FlowId) => void;
 }
-
-const ACTION_LABEL_KEYS: Record<FlowId, keyof Translations["quickActions"]> = {
-  planDay: "planDay",
-  hostelInfo: "hostelInfo",
-  events: "eventsToday",
-  transport: "transport",
-  eatOut: "eatOut",
-  needHelp: "needHelp",
-};
 
 export function QuickActionsBar({ t, onAction }: QuickActionsBarProps) {
   return (
@@ -47,15 +43,15 @@ export function QuickActionsBar({ t, onAction }: QuickActionsBarProps) {
                 onClick={() => onAction(action.id)}
                 className={cn(
                   "flex flex-col items-center gap-2 rounded-2xl p-4 min-w-[88px]",
-                  "active:scale-95 transition-transform duration-150",
-                  "border border-border shadow-sm bg-card",
-                  "hover:border-primary/30 hover:shadow-md"
+                  "active:scale-95 transition-all duration-150",
+                  "border border-border bg-card",
+                  "hover:border-[#53CED1]/50 hover:shadow-sm"
                 )}
               >
                 <div className={cn("rounded-xl p-2.5 text-xl", action.bgColor)}>
                   <span>{action.emoji}</span>
                 </div>
-                <span className="text-xs font-semibold text-foreground text-center leading-tight max-w-[72px]">
+                <span className={cn("text-xs font-semibold text-center leading-tight max-w-[72px] font-body", action.textColor)}>
                   {label}
                 </span>
               </button>
