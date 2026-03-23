@@ -82,7 +82,7 @@ export function GuidedFlow({ open, flowId, language, t, onClose, onOpenChat }: G
 
     // hostelInfo goes directly to chat
     if (flowId === "hostelInfo") {
-      const query = getCategoryQuery(value, language);
+      const query = getCategoryQuery(value, language as "en" | "es");
       handleClose();
       onOpenChat(query);
       return;

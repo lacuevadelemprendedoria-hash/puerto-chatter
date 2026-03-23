@@ -47,7 +47,7 @@ export function ContentList({ category, language, onEdit, onDeleted, refreshKey 
         .from("hostel_content")
         .select("id, title, content, sort_order, is_active")
         .eq("category", category)
-        .eq("language", language)
+        .eq("language", language as "en" | "es")
         .order("sort_order");
 
       if (error) {
