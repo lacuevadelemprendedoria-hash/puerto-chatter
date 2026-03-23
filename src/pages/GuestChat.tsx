@@ -1,8 +1,7 @@
 import { useEffect, useState, useCallback } from "react";
 import { Link } from "react-router-dom";
-import { Settings, MessageCircle } from "lucide-react";
+import { Settings, MessageCircle, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { LanguageToggle } from "@/components/chat/LanguageToggle";
 import { GuestStatusPanel } from "@/components/assistant/GuestStatusPanel";
 import { QuickActionsBar } from "@/components/assistant/QuickActionsBar";
 import { GuidedFlow } from "@/components/assistant/GuidedFlow";
@@ -13,34 +12,34 @@ import { Language, useTranslations } from "@/lib/i18n";
 import { FlowId } from "@/lib/flows";
 import logoSrc from "@/assets/puerto-nest-logo.png";
 
+const LANGUAGES: { code: Language; label: string; flag: string }[] = [
+  { code: "en", label: "English", flag: "🇬🇧" },
+  { code: "es", label: "Español", flag: "🇪🇸" },
+  { code: "de", label: "Deutsch", flag: "🇩🇪" },
+  { code: "it", label: "Italiano", flag: "🇮🇹" },
+  { code: "zh", label: "中文", flag: "🇨🇳" },
+];
+
 export default function GuestChat() {
   const [language, setLanguage] = useState<Language>("en");
+  const [showLangMenu, setShowLangMenu] = useState(false);
   const t = useTranslations(language);
-
   const { messages, isLoading, sendMessage, clearMessages } = useChat(language);
-
   const [activeFlow, setActiveFlow] = useState<FlowId | null>(null);
   const [chatOpen, setChatOpen] = useState(false);
   const [pendingQuery, setPendingQuery] = useState<string | null>(null);
 
-  const toggleLanguage = () => {
-    const newLang = language === "en" ? "es" : "en";
-    setLanguage(newLang);
+  const handleSelectLanguage = (lang: Language) => {
+    setLanguage(lang);
+    setShowLangMenu(false);
     clearMessages();
-  };
-
-  const handleOpenFlow = (flowId: FlowId) => {
-    setActiveFlow(flowId);
   };
 
   const handleOpenChat = useCallback((query?: string) => {
     setChatOpen(true);
-    if (query) {
-      setPendingQuery(query);
-    }
+    if (query) setPendingQuery(query);
   }, []);
 
-  // Send pending query once chat opens
   useEffect(() => {
     if (chatOpen && pendingQuery) {
       sendMessage(pendingQuery);
@@ -48,59 +47,69 @@ export default function GuestChat() {
     }
   }, [chatOpen, pendingQuery, sendMessage]);
 
+  const currentLang = LANGUAGES.find((l) => l.code === language);
+
   return (
     <div className="flex flex-col h-screen max-h-screen bg-background">
-      {/* Persistent header */}
+      {/* Header */}
       <header className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-4 py-3">
-        <img
-          src={logoSrc}
-          alt="Puerto Nest Hostel"
-          className="h-8 w-auto object-contain drop-shadow"
-        />
+        <img src={logoSrc} alt="Puerto Nest Hostel" className="h-8 w-auto object-contain drop-shadow" />
         <div className="flex items-center gap-1">
-          <LanguageToggle
-            language={language}
-            onToggle={toggleLanguage}
-            label={t.language.toggle}
-          />
-          <Link to="/admin">
+          {/* Language selector */}
+          <div className="relative">
             <Button
               variant="ghost"
-              size="icon"
-              className="text-primary-foreground/80 hover:text-primary-foreground hover:bg-white/10"
+              size="sm"
+              onClick={() => setShowLangMenu(!showLangMenu)}
+              className="text-primary-foreground/80 hover:text-primary-foreground hover:bg-white/10 gap-1.5 px-2"
             >
+              <Globe className="w-4 h-4" />
+              <span className="text-xs font-medium">{currentLang?.flag} {language.toUpperCase()}</span>
+            </Button>
+            {showLangMenu && (
+              <div className="absolute right-0 top-full mt-1 bg-card border border-border rounded-xl shadow-lg overflow-hidden z-50 min-w-[140px]">
+                {LANGUAGES.map((lang) => (
+                  <button
+                    key={lang.code}
+                    onClick={() => handleSelectLanguage(lang.code)}
+                    className={`w-full flex items-center gap-2 px-3 py-2.5 text-sm hover:bg-muted transition-colors text-left ${language === lang.code ? "bg-primary/5 text-primary font-medium" : "text-foreground"}`}
+                  >
+                    <span>{lang.flag}</span>
+                    <span>{lang.label}</span>
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+          <Link to="/admin">
+            <Button variant="ghost" size="icon" className="text-primary-foreground/80 hover:text-primary-foreground hover:bg-white/10">
               <Settings className="w-5 h-5" />
             </Button>
           </Link>
         </div>
       </header>
 
-      {/* Scrollable main content */}
+      {/* Close language menu on outside click */}
+      {showLangMenu && (
+        <div className="fixed inset-0 z-10" onClick={() => setShowLangMenu(false)} />
+      )}
+
+      {/* Scrollable content */}
       <div className="flex-1 overflow-y-auto scrollbar-hide">
-        {/* Status panel with gradient header */}
-        <GuestStatusPanel
-          t={t}
-          language={language}
-          onQuickHelp={() => handleOpenFlow("needHelp")}
-        />
-
-        {/* Quick actions horizontal scroll */}
-        <QuickActionsBar t={t} onAction={handleOpenFlow} />
-
-        {/* Activity feed */}
+        <GuestStatusPanel t={t} language={language} onQuickHelp={() => setActiveFlow("needHelp")} />
+        <QuickActionsBar t={t} onAction={(flowId) => setActiveFlow(flowId)} />
         <ActivityFeed language={language} onOpenChat={handleOpenChat} />
       </div>
 
       {/* Floating chat button */}
       <button
         onClick={() => handleOpenChat()}
-        className="fixed bottom-6 right-4 z-30 flex items-center gap-2 bg-primary text-primary-foreground font-bold py-3 px-5 rounded-full shadow-lg hover:bg-primary/90 active:scale-95 transition-all"
+        className="fixed bottom-6 right-4 z-30 flex items-center gap-2 bg-[#53CED1] hover:bg-[#0D6F82] text-white font-bold py-3 px-5 rounded-full shadow-lg active:scale-95 transition-all font-heading"
       >
         <MessageCircle className="w-5 h-5" />
         <span className="text-sm">{t.chat.open}</span>
       </button>
 
-      {/* Guided flow drawer */}
       <GuidedFlow
         open={activeFlow !== null}
         flowId={activeFlow}
@@ -110,7 +119,6 @@ export default function GuestChat() {
         onOpenChat={handleOpenChat}
       />
 
-      {/* Chat panel drawer */}
       <ChatPanel
         open={chatOpen}
         onClose={() => setChatOpen(false)}

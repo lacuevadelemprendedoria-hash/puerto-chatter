@@ -122,7 +122,7 @@ export function ContentEditor({
       } else {
         const { error } = await supabase.from("hostel_content").insert({
           category,
-          language,
+          language: language as "en" | "es",
           title: title.trim(),
           content: content.trim(),
           is_active: isActive,

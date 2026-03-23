@@ -5,7 +5,8 @@
  * 1. Change the values below
  * 2. Replace src/assets/puerto-nest-logo.png with the new logo
  * 3. Update VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY in .env
- * 4. Deploy!
+ * 4. Set ANTHROPIC_API_KEY in Supabase Edge Function Secrets
+ * 5. Deploy!
  * ─────────────────────────────────────────────────────────────────
  */
 
@@ -17,35 +18,41 @@ export const HOSTEL_CONFIG = {
   island: "Tenerife",
   country: "Spain",
 
-  // ── Coordinates (for weather widget) ─────────────────────────
+  // ── Coordinates for weather widget (Puerto de la Cruz) ───────
   latitude: 28.4127,
   longitude: -16.5496,
 
   // ── Contact ───────────────────────────────────────────────────
-  receptionPhone: "+34 XXX XXX XXX",
-  whatsapp: "+34 XXX XXX XXX",
-  email: "reception@puertones.com",
+  receptionPhone: "+34 656 36 80 39",
+  whatsapp: "+34 656 36 80 39",
 
-  // ── Brand colors (must match tailwind.config.ts) ─────────────
-  primaryColor: "#1a6b5a",
-  accentColor: "#f59e0b",
+  // ── WiFi ────────────────────────────────────────────────────
+  wifiName: "PuertoNest",
+  wifiPassword: "nest2024",
+
+  // ── Schedule ──────────────────────────────────────────────────
+  checkInTime: "14:00",
+  checkOutTime: "11:00",
+  receptionOpen: "13:00",
+  receptionClose: "21:00",
+
+  // ── Reception hours ───────────────────────────────────────────
+  receptionHours: "Mon–Sun 13:00–21:00",
 
   // ── Nest Pass ─────────────────────────────────────────────────
   nestPass: {
     enabled: true,
-    standardPricePerNight: 25,
-    passDiscountPercent: 30,
-    minNights: 7,
+    // No specific prices hardcoded — guests ask reception for current rates
   },
 
   // ── Admin ─────────────────────────────────────────────────────
   adminTitle: "Puerto Nest Admin",
 
-  // ── Other Nest locations (for Nest Pass cross-promotion) ─────
+  // ── Other Nest locations ──────────────────────────────────────
   otherNests: [
     { name: "Las Eras Nest", city: "Güímar, Tenerife" },
     { name: "Duque Nest", city: "Costa Adeje, Tenerife" },
-    { name: "Medano Nest", city: "El Médano, Tenerife" },
+    { name: "El Médano Nest", city: "El Médano, Tenerife" },
     { name: "Gran Canaria Nest", city: "Las Palmas, Gran Canaria" },
   ],
 } as const;

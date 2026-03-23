@@ -1,6 +1,7 @@
 import { Zap } from "lucide-react";
 import { Translations, Language } from "@/lib/i18n";
 import { useWeather } from "@/hooks/useWeather";
+import { useHostelConfig } from "@/hooks/useHostelConfig";
 
 interface GuestStatusPanelProps {
   t: Translations;
@@ -18,6 +19,7 @@ function getGreeting(t: Translations): string {
 export function GuestStatusPanel({ t, language, onQuickHelp }: GuestStatusPanelProps) {
   const greeting = getGreeting(t);
   const weather = useWeather(language);
+  const { config, getEventToday } = useHostelConfig();
 
   const weatherLabel = weather.loading
     ? null
@@ -25,11 +27,13 @@ export function GuestStatusPanel({ t, language, onQuickHelp }: GuestStatusPanelP
     ? `${weather.data.emoji} ${weather.data.temperature}°C · ${weather.data.description}`
     : t.statusPanel.weather;
 
+  const eventToday = getEventToday(language);
+
   return (
     <div className="welcome-gradient text-primary-foreground px-4 pt-20 pb-6">
       <div className="max-w-md mx-auto">
-        <p className="text-sm font-medium opacity-80 mb-1">{greeting} 👋</p>
-        <h1 className="text-2xl font-bold mb-3">Puerto Nest Assistant</h1>
+        <p className="text-sm font-medium opacity-80 mb-1 font-body">{greeting} 👋</p>
+        <h1 className="text-2xl font-bold mb-3 font-heading">{config.hostelName}</h1>
 
         {/* Status row */}
         <div className="flex items-center gap-3 mb-4">
@@ -41,7 +45,7 @@ export function GuestStatusPanel({ t, language, onQuickHelp }: GuestStatusPanelP
             )}
           </div>
           <div className="flex items-center gap-1.5 bg-white/15 rounded-full px-3 py-1.5">
-            <span className="text-sm font-medium">{t.statusPanel.eventToday}</span>
+            <span className="text-sm font-medium">{eventToday}</span>
           </div>
         </div>
 
