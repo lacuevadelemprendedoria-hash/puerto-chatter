@@ -53,7 +53,7 @@ export default function GuestChat() {
     <div className="flex flex-col h-screen max-h-screen bg-background">
       {/* Header */}
       <header className="absolute top-0 left-0 right-0 z-20 flex items-center justify-between px-4 py-3">
-        <img src={logoSrc} alt="Puerto Nest Hostel" className="h-8 w-auto object-contain drop-shadow" />
+        <img src={logoSrc} alt="Puerto Nest Hostel" className="h-8 w-auto object-contain drop-shadow" style={{ filter: 'brightness(0) invert(1)' }} />
         <div className="flex items-center gap-1">
           {/* Language selector */}
           <div className="relative">
