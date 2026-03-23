@@ -26,6 +26,16 @@ export const HOSTEL_CONFIG = {
   receptionPhone: "+34 656 36 80 39",
   whatsapp: "+34 656 36 80 39",
 
+  // ── WiFi ────────────────────────────────────────────────────
+  wifiName: "PuertoNest",
+  wifiPassword: "nest2024",
+
+  // ── Schedule ──────────────────────────────────────────────────
+  checkInTime: "14:00",
+  checkOutTime: "11:00",
+  receptionOpen: "13:00",
+  receptionClose: "21:00",
+
   // ── Reception hours ───────────────────────────────────────────
   receptionHours: "Mon–Sun 13:00–21:00",
 

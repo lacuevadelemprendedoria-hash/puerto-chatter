@@ -18,7 +18,16 @@ export const translations = {
       planDay: "Plan My Day", hostelInfo: "Hostel Info", eventsToday: "Events Today",
       transport: "Transport", eatOut: "Eat & Go Out", needHelp: "I Need Help",
     },
-    feed: { title: "Today at the Hostel" },
+    feed: {
+      title: "Today at the Hostel",
+      carnival: {
+        santaCruz: "Carnival in Santa Cruz",
+        santaCruzDesc: "Main carnival parade in the capital",
+        puertoCruz: "Carnival in Puerto de la Cruz",
+        puertoCruzDesc: "Local carnival celebration",
+        moreInfo: "More info",
+      },
+    },
     flows: {
       planDay: {
         title: "Plan My Day",
