@@ -302,47 +302,19 @@ function EventsContent({
   onOpenChat: (query?: string) => void;
   onClose: () => void;
 }) {
-  const events = [
-    {
-      time: "20:00",
-      title: t.feed.carnival.santaCruz,
-      desc: t.feed.carnival.santaCruzDesc,
-    },
-    {
-      time: "19:00",
-      title: t.feed.carnival.puertoCruz,
-      desc: t.feed.carnival.puertoCruzDesc,
-    },
-  ];
-
   return (
     <div className="animate-fade-in space-y-3">
-      {events.map((event, i) => (
-        <div key={i} className="bg-card border border-border rounded-2xl p-4 shadow-sm">
-          <div className="flex items-start gap-3">
-            <div className="bg-primary/10 rounded-xl px-3 py-1.5 shrink-0">
-              <span className="text-sm font-bold text-primary">{event.time}</span>
-            </div>
-            <div className="flex-1">
-              <h3 className="font-bold text-foreground">{event.title}</h3>
-              <p className="text-sm text-muted-foreground mt-1">{event.desc}</p>
-            </div>
-          </div>
-          <button
-            onClick={() => {
-              onClose();
-              onOpenChat(
-                language === "en"
-                  ? `Tell me more about ${event.title}`
-                  : `Cuéntame más sobre ${event.title}`
-              );
-            }}
-            className="mt-3 w-full py-2 px-4 rounded-xl bg-primary/10 text-primary font-semibold text-sm hover:bg-primary/20 transition-colors"
-          >
-            {t.feed.carnival.moreInfo}
-          </button>
-        </div>
-      ))}
+      <div className="bg-card border border-border rounded-2xl p-6 shadow-sm text-center">
+        <span className="text-4xl mb-3 block">📋</span>
+        <h3 className="font-bold text-foreground text-lg">
+          {language === "es" ? "Mira la pizarra de recepción" : "Check the reception board"}
+        </h3>
+        <p className="text-sm text-muted-foreground mt-2">
+          {language === "es"
+            ? "Los eventos y actividades de hoy están en la pizarra de recepción."
+            : "Today's events and activities are on the reception board."}
+        </p>
+      </div>
     </div>
   );
 }
