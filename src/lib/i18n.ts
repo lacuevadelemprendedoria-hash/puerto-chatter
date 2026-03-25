@@ -20,13 +20,6 @@ export const translations = {
     },
     feed: {
       title: "Today at the Hostel",
-      carnival: {
-        santaCruz: "Carnival in Santa Cruz",
-        santaCruzDesc: "Main carnival parade in the capital",
-        puertoCruz: "Carnival in Puerto de la Cruz",
-        puertoCruzDesc: "Local carnival celebration",
-        moreInfo: "More info",
-      },
     },
     flows: {
       planDay: {
@@ -252,13 +245,6 @@ export const translations = {
     },
     feed: {
       title: "Hoy en el Hostel",
-      carnival: {
-        santaCruz: "Carnaval en Santa Cruz",
-        santaCruzDesc: "Desfile principal de carnaval en la capital",
-        puertoCruz: "Carnaval en Puerto de la Cruz",
-        puertoCruzDesc: "Celebración local de carnaval",
-        moreInfo: "Más información",
-      },
     },
     flows: {
       planDay: {
