@@ -315,6 +315,17 @@ function EventsContent({
             : "Today's events and activities are on the reception board."}
         </p>
       </div>
+      <div className="bg-card border border-border rounded-2xl p-6 shadow-sm text-center">
+        <span className="text-4xl mb-3 block">📲</span>
+        <h3 className="font-bold text-foreground text-lg">
+          {language === "es" ? "Escanea el código QR" : "Scan the QR code"}
+        </h3>
+        <p className="text-sm text-muted-foreground mt-2">
+          {language === "es"
+            ? "Escanea el QR en recepción para ver las actividades de Puerto Nest, las Nest Experiences y eventos en otros hosteles de Nest."
+            : "Scan the QR at reception to see Puerto Nest activities, Nest Experiences, and events at other Nest hostels."}
+        </p>
+      </div>
     </div>
   );
 }
