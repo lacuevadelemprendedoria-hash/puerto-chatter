@@ -213,6 +213,30 @@ export function FeedEditor({ isOpen, onClose, onSaved, itemId }: FeedEditorProps
               </p>
             </div>
 
+            {form.type === "curiosity" && (
+              <div className="space-y-1.5">
+                <Label>Day of week</Label>
+                <Select value={form.day_of_week !== null ? String(form.day_of_week) : ""} onValueChange={(v) => set("day_of_week", parseInt(v))}>
+                  <SelectTrigger><SelectValue placeholder="Select day..." /></SelectTrigger>
+                  <SelectContent>
+                    {[
+                      { value: "1", label: "Monday / Lunes" },
+                      { value: "2", label: "Tuesday / Martes" },
+                      { value: "3", label: "Wednesday / Miércoles" },
+                      { value: "4", label: "Thursday / Jueves" },
+                      { value: "5", label: "Friday / Viernes" },
+                      { value: "6", label: "Saturday / Sábado" },
+                      { value: "0", label: "Sunday / Domingo" },
+                    ].map((d) => (
+                      <SelectItem key={d.value} value={d.value}>{d.label}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <p className="text-xs text-muted-foreground">
+                  This curiosity will only show on the selected day.
+                </p>
+              </div>
+            )}
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1.5">
                 <Label>Show from (optional)</Label>
