@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 interface FeedItem {
   id: string;
-  type: "event" | "restaurant" | "hostel_activity" | "banner";
+  type: "event" | "restaurant" | "hostel_activity" | "banner" | "curiosity";
   emoji: string;
   title_en: string;
   title_es: string;
@@ -18,6 +18,7 @@ interface FeedItem {
   cta_label_es: string;
   cta_action: string;
   sort_order: number;
+  day_of_week: number | null;
 }
 
 interface ActivityFeedProps {
@@ -44,7 +45,8 @@ export function ActivityFeed({ language, onOpenChat }: ActivityFeedProps) {
 
       if (!error && data) {
         setItems(data as FeedItem[]);
-        if (data.length > 0) setExpanded(data[0].id);
+        const regular = data.filter((d: any) => d.type !== "curiosity");
+        if (regular.length > 0) setExpanded(regular[0].id);
       }
       setLoading(false);
     };
@@ -61,7 +63,6 @@ export function ActivityFeed({ language, onOpenChat }: ActivityFeedProps) {
       window.open(action, "_blank", "noopener,noreferrer");
       return;
     }
-    // Use the localized title as the chat query context
     const title = getText(item, "title", language);
     const query = language === "es"
       ? `Cuéntame más sobre "${title}"`
@@ -70,6 +71,11 @@ export function ActivityFeed({ language, onOpenChat }: ActivityFeedProps) {
   };
 
   const feedTitle = language === "es" ? "Hoy en el Hostel" : "Today at the Hostel";
+
+  // Split items
+  const regularItems = items.filter((i) => i.type !== "curiosity");
+  const todayDow = new Date().getDay();
+  const todayCuriosity = items.find((i) => i.type === "curiosity" && i.day_of_week === todayDow);
 
   if (loading) {
     return (
@@ -84,35 +90,100 @@ export function ActivityFeed({ language, onOpenChat }: ActivityFeedProps) {
     );
   }
 
-  if (items.length === 0) {
-    return (
-      <div className="px-4 pb-24">
-        <h2 className="text-lg font-bold text-foreground mb-3">{feedTitle}</h2>
-        <p className="text-sm text-muted-foreground text-center py-8">
-          {language === "es" ? "No hay novedades hoy." : "Nothing new today."}
-        </p>
-      </div>
-    );
-  }
+  const curiosityTitle = language === "es" ? "¿Sabías que...? 🌴" : "Did you know? 🌴";
+  const badgeText = language === "es" ? "Dato del día" : "Daily tip";
 
   return (
     <div className="px-4 pb-24">
-      <h2 className="text-lg font-bold text-foreground mb-3">{feedTitle}</h2>
-      <div className="space-y-3">
-        {items.map((item) => {
-          const isOpen = expanded === item.id;
-          const title = getText(item, "title", language);
-          const subtitle = getText(item, "subtitle", language);
-          const description = getText(item, "description", language);
-          const ctaLabel = getText(item, "cta_label", language);
+      {/* Regular feed */}
+      {regularItems.length > 0 && (
+        <>
+          <h2 className="text-lg font-bold text-foreground mb-3">{feedTitle}</h2>
+          <div className="space-y-3">
+            {regularItems.map((item) => {
+              const isOpen = expanded === item.id;
+              const title = getText(item, "title", language);
+              const subtitle = getText(item, "subtitle", language);
+              const description = getText(item, "description", language);
+              const ctaLabel = getText(item, "cta_label", language);
 
-          return (
+              return (
+                <div
+                  key={item.id}
+                  className={cn(
+                    "bg-card border rounded-2xl overflow-hidden shadow-sm transition-all duration-200",
+                    isOpen ? "border-primary/30 shadow-md" : "border-border"
+                  )}
+                >
+                  <button
+                    onClick={() => toggle(item.id)}
+                    className="w-full flex items-center gap-3 p-4 text-left"
+                  >
+                    <span className="text-2xl">{item.emoji}</span>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2">
+                        <span className="font-bold text-foreground truncate">{title}</span>
+                        {item.type === "event" && (
+                          <span className="text-xs font-bold px-2 py-0.5 rounded-full shrink-0 font-heading"
+                            style={{background: '#53CED1', color: '#fff'}}>
+                            {language === "es" ? "HOY" : "TODAY"}
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-0.5 line-clamp-1">
+                        {subtitle || description.split("\n")[0]}
+                      </p>
+                    </div>
+                    {isOpen
+                      ? <ChevronUp className="w-5 h-5 text-muted-foreground shrink-0" />
+                      : <ChevronDown className="w-5 h-5 text-muted-foreground shrink-0" />
+                    }
+                  </button>
+
+                  {isOpen && (
+                    <div className="px-4 pb-4 border-t border-border/50 animate-fade-in">
+                      <div className="pt-3 space-y-1">
+                        {description.split("\n").map((line, i) => (
+                          <p key={i} className="text-sm text-muted-foreground">{line}</p>
+                        ))}
+                      </div>
+                      {ctaLabel && (
+                        <button
+                          onClick={() => handleCta(item)}
+                          className="mt-4 w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-white font-semibold text-sm active:scale-95 transition-all font-heading"
+                          style={{background: 'linear-gradient(to right, #53CED1, #0D6F82)'}}
+                        >
+                          {ctaLabel}
+                          {item.cta_action?.startsWith("http") && <ExternalLink className="w-4 h-4" />}
+                        </button>
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </>
+      )}
+
+      {/* Curiosity section */}
+      {todayCuriosity && (() => {
+        const item = todayCuriosity;
+        const isOpen = expanded === item.id;
+        const title = getText(item, "title", language);
+        const subtitle = getText(item, "subtitle", language);
+        const description = getText(item, "description", language);
+        const ctaLabel = getText(item, "cta_label", language);
+
+        return (
+          <div className={cn(regularItems.length > 0 && "mt-6")}>
+            <h2 className="text-lg font-bold text-foreground mb-3">{curiosityTitle}</h2>
             <div
-              key={item.id}
               className={cn(
-                "bg-card border rounded-2xl overflow-hidden shadow-sm transition-all duration-200",
-                isOpen ? "border-primary/30 shadow-md" : "border-border"
+                "border rounded-2xl overflow-hidden shadow-sm transition-all duration-200",
+                isOpen ? "shadow-md" : ""
               )}
+              style={{ background: '#FEF3EA', borderColor: isOpen ? '#E37C25' : undefined }}
             >
               <button
                 onClick={() => toggle(item.id)}
@@ -122,12 +193,10 @@ export function ActivityFeed({ language, onOpenChat }: ActivityFeedProps) {
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
                     <span className="font-bold text-foreground truncate">{title}</span>
-                    {item.type === "event" && (
-                      <span className="text-xs font-bold px-2 py-0.5 rounded-full shrink-0 font-heading"
-                        style={{background: '#53CED1', color: '#fff'}}>
-                        {language === "es" ? "HOY" : "TODAY"}
-                      </span>
-                    )}
+                    <span className="text-xs font-bold px-2 py-0.5 rounded-full shrink-0 font-heading text-white"
+                      style={{ background: '#E37C25' }}>
+                      {badgeText}
+                    </span>
                   </div>
                   <p className="text-xs text-muted-foreground mt-0.5 line-clamp-1">
                     {subtitle || description.split("\n")[0]}
@@ -140,7 +209,7 @@ export function ActivityFeed({ language, onOpenChat }: ActivityFeedProps) {
               </button>
 
               {isOpen && (
-                <div className="px-4 pb-4 border-t border-border/50 animate-fade-in">
+                <div className="px-4 pb-4 border-t animate-fade-in" style={{ borderColor: '#E37C25' + '33' }}>
                   <div className="pt-3 space-y-1">
                     {description.split("\n").map((line, i) => (
                       <p key={i} className="text-sm text-muted-foreground">{line}</p>
@@ -150,7 +219,7 @@ export function ActivityFeed({ language, onOpenChat }: ActivityFeedProps) {
                     <button
                       onClick={() => handleCta(item)}
                       className="mt-4 w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl text-white font-semibold text-sm active:scale-95 transition-all font-heading"
-                      style={{background: 'linear-gradient(to right, #53CED1, #0D6F82)'}}
+                      style={{ background: '#E37C25' }}
                     >
                       {ctaLabel}
                       {item.cta_action?.startsWith("http") && <ExternalLink className="w-4 h-4" />}
@@ -159,9 +228,18 @@ export function ActivityFeed({ language, onOpenChat }: ActivityFeedProps) {
                 </div>
               )}
             </div>
-          );
-        })}
-      </div>
+          </div>
+        );
+      })()}
+
+      {regularItems.length === 0 && !todayCuriosity && (
+        <div>
+          <h2 className="text-lg font-bold text-foreground mb-3">{feedTitle}</h2>
+          <p className="text-sm text-muted-foreground text-center py-8">
+            {language === "es" ? "No hay novedades hoy." : "Nothing new today."}
+          </p>
+        </div>
+      )}
     </div>
   );
 }

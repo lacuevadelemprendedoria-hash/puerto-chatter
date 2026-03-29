@@ -14,7 +14,7 @@ import {
 import { Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
-type FeedItemType = "event" | "restaurant" | "hostel_activity" | "banner";
+type FeedItemType = "event" | "restaurant" | "hostel_activity" | "banner" | "curiosity";
 
 interface FeedItem {
   id?: string;
