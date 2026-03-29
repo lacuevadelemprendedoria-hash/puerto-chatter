@@ -154,6 +154,7 @@ export type Database = {
           cta_action: string | null
           cta_label_en: string | null
           cta_label_es: string | null
+          day_of_week: number | null
           description_en: string | null
           description_es: string | null
           emoji: string | null
@@ -174,6 +175,7 @@ export type Database = {
           cta_action?: string | null
           cta_label_en?: string | null
           cta_label_es?: string | null
+          day_of_week?: number | null
           description_en?: string | null
           description_es?: string | null
           emoji?: string | null
@@ -194,6 +196,7 @@ export type Database = {
           cta_action?: string | null
           cta_label_en?: string | null
           cta_label_es?: string | null
+          day_of_week?: number | null
           description_en?: string | null
           description_es?: string | null
           emoji?: string | null
@@ -298,7 +301,12 @@ export type Database = {
         | "transport"
         | "excursions"
         | "where_to_eat_go_out"
-      feed_item_type: "event" | "restaurant" | "hostel_activity" | "banner"
+      feed_item_type:
+        | "event"
+        | "restaurant"
+        | "hostel_activity"
+        | "banner"
+        | "curiosity"
       supported_language: "en" | "es"
     }
     CompositeTypes: {
@@ -437,7 +445,13 @@ export const Constants = {
         "excursions",
         "where_to_eat_go_out",
       ],
-      feed_item_type: ["event", "restaurant", "hostel_activity", "banner"],
+      feed_item_type: [
+        "event",
+        "restaurant",
+        "hostel_activity",
+        "banner",
+        "curiosity",
+      ],
       supported_language: ["en", "es"],
     },
   },
