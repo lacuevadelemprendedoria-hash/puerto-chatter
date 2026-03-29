@@ -33,6 +33,7 @@ interface FeedItem {
   ends_at: string;
   is_active: boolean;
   sort_order: number;
+  day_of_week: number | null;
 }
 
 const EMPTY: FeedItem = {
@@ -46,6 +47,7 @@ const EMPTY: FeedItem = {
   starts_at: "", ends_at: "",
   is_active: true,
   sort_order: 0,
+  day_of_week: null,
 };
 
 interface FeedEditorProps {
@@ -121,6 +123,7 @@ export function FeedEditor({ isOpen, onClose, onSaved, itemId }: FeedEditorProps
     restaurant: "🍽️ Restaurant",
     hostel_activity: "🏠 Hostel Activity",
     banner: "📢 Banner / Announcement",
+    curiosity: "🌴 Curiosity / Did you know?",
   };
 
   return (
