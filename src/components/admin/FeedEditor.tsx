@@ -14,7 +14,7 @@ import {
 import { Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
-type FeedItemType = "event" | "restaurant" | "hostel_activity" | "banner";
+type FeedItemType = "event" | "restaurant" | "hostel_activity" | "banner" | "curiosity";
 
 interface FeedItem {
   id?: string;
@@ -33,6 +33,7 @@ interface FeedItem {
   ends_at: string;
   is_active: boolean;
   sort_order: number;
+  day_of_week: number | null;
 }
 
 const EMPTY: FeedItem = {
@@ -46,6 +47,7 @@ const EMPTY: FeedItem = {
   starts_at: "", ends_at: "",
   is_active: true,
   sort_order: 0,
+  day_of_week: null,
 };
 
 interface FeedEditorProps {
@@ -121,6 +123,7 @@ export function FeedEditor({ isOpen, onClose, onSaved, itemId }: FeedEditorProps
     restaurant: "🍽️ Restaurant",
     hostel_activity: "🏠 Hostel Activity",
     banner: "📢 Banner / Announcement",
+    curiosity: "🌴 Curiosity / Did you know?",
   };
 
   return (
@@ -210,6 +213,30 @@ export function FeedEditor({ isOpen, onClose, onSaved, itemId }: FeedEditorProps
               </p>
             </div>
 
+            {form.type === "curiosity" && (
+              <div className="space-y-1.5">
+                <Label>Day of week</Label>
+                <Select value={form.day_of_week !== null ? String(form.day_of_week) : ""} onValueChange={(v) => set("day_of_week", parseInt(v))}>
+                  <SelectTrigger><SelectValue placeholder="Select day..." /></SelectTrigger>
+                  <SelectContent>
+                    {[
+                      { value: "1", label: "Monday / Lunes" },
+                      { value: "2", label: "Tuesday / Martes" },
+                      { value: "3", label: "Wednesday / Miércoles" },
+                      { value: "4", label: "Thursday / Jueves" },
+                      { value: "5", label: "Friday / Viernes" },
+                      { value: "6", label: "Saturday / Sábado" },
+                      { value: "0", label: "Sunday / Domingo" },
+                    ].map((d) => (
+                      <SelectItem key={d.value} value={d.value}>{d.label}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <p className="text-xs text-muted-foreground">
+                  This curiosity will only show on the selected day.
+                </p>
+              </div>
+            )}
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1.5">
                 <Label>Show from (optional)</Label>
