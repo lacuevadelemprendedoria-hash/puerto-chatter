@@ -33,31 +33,29 @@ interface QuickActionsBarProps {
 export function QuickActionsBar({ t, onAction }: QuickActionsBarProps) {
   return (
     <div className="px-4 py-5">
-      <div className="overflow-x-auto scrollbar-hide -mx-4 px-4">
-        <div className="flex gap-3 w-max">
-          {ACTIONS.map((action) => {
-            const label = t.quickActions[ACTION_LABEL_KEYS[action.id]];
-            return (
-              <button
-                key={action.id}
-                onClick={() => onAction(action.id)}
-                className={cn(
-                  "flex flex-col items-center gap-2 rounded-2xl p-4 min-w-[88px]",
-                  "active:scale-95 transition-all duration-150",
-                  "border border-border bg-card",
-                  "hover:border-[#53CED1]/50 hover:shadow-sm"
-                )}
-              >
-                <div className={cn("rounded-xl p-2.5 text-xl", action.bgColor)}>
-                  <span>{action.emoji}</span>
-                </div>
-                <span className={cn("text-xs font-semibold text-center leading-tight max-w-[72px] font-body", action.textColor)}>
-                  {label}
-                </span>
-              </button>
-            );
-          })}
-        </div>
+      <div className="grid grid-cols-3 gap-3">
+        {ACTIONS.map((action) => {
+          const label = t.quickActions[ACTION_LABEL_KEYS[action.id]];
+          return (
+            <button
+              key={action.id}
+              onClick={() => onAction(action.id)}
+              className={cn(
+                "flex flex-col items-center gap-2 rounded-2xl p-4",
+                "active:scale-95 transition-all duration-150",
+                "border border-border bg-card",
+                "hover:border-[#53CED1]/50 hover:shadow-sm"
+              )}
+            >
+              <div className={cn("rounded-xl p-2.5 text-xl", action.bgColor)}>
+                <span>{action.emoji}</span>
+              </div>
+              <span className={cn("text-xs font-semibold text-center leading-tight font-body", action.textColor)}>
+                {label}
+              </span>
+            </button>
+          );
+        })}
       </div>
     </div>
   );
