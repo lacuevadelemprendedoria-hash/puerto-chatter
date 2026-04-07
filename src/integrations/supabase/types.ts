@@ -161,6 +161,7 @@ export type Database = {
           ends_at: string | null
           id: string
           is_active: boolean
+          month: number | null
           sort_order: number
           starts_at: string | null
           subtitle_en: string | null
@@ -182,6 +183,7 @@ export type Database = {
           ends_at?: string | null
           id?: string
           is_active?: boolean
+          month?: number | null
           sort_order?: number
           starts_at?: string | null
           subtitle_en?: string | null
@@ -203,6 +205,7 @@ export type Database = {
           ends_at?: string | null
           id?: string
           is_active?: boolean
+          month?: number | null
           sort_order?: number
           starts_at?: string | null
           subtitle_en?: string | null
@@ -307,6 +310,7 @@ export type Database = {
         | "hostel_activity"
         | "banner"
         | "curiosity"
+        | "calendar"
       supported_language: "en" | "es"
     }
     CompositeTypes: {
@@ -451,6 +455,7 @@ export const Constants = {
         "hostel_activity",
         "banner",
         "curiosity",
+        "calendar",
       ],
       supported_language: ["en", "es"],
     },
