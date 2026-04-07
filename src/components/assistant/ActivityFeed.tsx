@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 
 interface FeedItem {
   id: string;
-  type: "event" | "restaurant" | "hostel_activity" | "banner" | "curiosity";
+  type: "event" | "restaurant" | "hostel_activity" | "banner" | "curiosity" | "calendar";
   emoji: string;
   title_en: string;
   title_es: string;
@@ -19,6 +19,7 @@ interface FeedItem {
   cta_action: string;
   sort_order: number;
   day_of_week: number | null;
+  month: number | null;
 }
 
 interface ActivityFeedProps {

@@ -240,6 +240,35 @@ export function FeedEditor({ isOpen, onClose, onSaved, itemId }: FeedEditorProps
                 </p>
               </div>
             )}
+            {form.type === "calendar" && (
+              <div className="space-y-1.5">
+                <Label>Month</Label>
+                <Select value={form.month !== null ? String(form.month) : ""} onValueChange={(v) => set("month", parseInt(v))}>
+                  <SelectTrigger><SelectValue placeholder="Select month..." /></SelectTrigger>
+                  <SelectContent>
+                    {[
+                      { value: "1", label: "January / Enero" },
+                      { value: "2", label: "February / Febrero" },
+                      { value: "3", label: "March / Marzo" },
+                      { value: "4", label: "April / Abril" },
+                      { value: "5", label: "May / Mayo" },
+                      { value: "6", label: "June / Junio" },
+                      { value: "7", label: "July / Julio" },
+                      { value: "8", label: "August / Agosto" },
+                      { value: "9", label: "September / Septiembre" },
+                      { value: "10", label: "October / Octubre" },
+                      { value: "11", label: "November / Noviembre" },
+                      { value: "12", label: "December / Diciembre" },
+                    ].map((m) => (
+                      <SelectItem key={m.value} value={m.value}>{m.label}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <p className="text-xs text-muted-foreground">
+                  This calendar item will only show during the selected month.
+                </p>
+              </div>
+            )
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1.5">
                 <Label>Show from (optional)</Label>
