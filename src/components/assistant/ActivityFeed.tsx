@@ -303,6 +303,7 @@ export function ActivityFeed({ language, onOpenChat }: ActivityFeedProps) {
         );
       })()}
 
+      {regularItems.length === 0 && !todayCuriosity && !calendarItem && (
         <div>
           <h2 className="text-lg font-bold text-foreground mb-3">{feedTitle}</h2>
           <p className="text-sm text-muted-foreground text-center py-8">
