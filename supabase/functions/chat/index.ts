@@ -110,101 +110,73 @@ Uber / Cabify: Does not work well in the area. Use taxi instead.
 Car rental: Recommended for excursions (Teide, beaches, nature routes), flexible travel, groups or guests with luggage. Public transport works but frequencies can be limited.
 Bus info: Check titsa.com for all routes and timetables across Tenerife.
 
-=== BEACHES & SWIMMING ===
-Playa Jardín: Closest beach, few minutes walk. Volcanic black sand designed by César Manrique. Lifeguards in high season. Main beach for swimming.
-Playa San Telmo: Another urban beach in Puerto de la Cruz, easy access from the centre. Lifeguards in season.
-Playa Bollullo (El Bollullo): Natural black volcanic sand, quieter and more secluded. Short bus/car ride from Puerto de la Cruz. Great for disconnecting.
-Playa Martiánez / Playa del Castillo / Playa del Muelle: Urban beaches in the city, combined bathing areas with nearby services.
-Los Teresitas: Via Santa Cruz, ~4€ by bus.
+=== PLACES & ACTIVITIES — VERIFIED INFORMATION ===
 
-=== NATURAL POOLS ===
-Lago Martiánez: Seawater pool complex designed by César Manrique. Popular and well-known. Controlled, family-friendly environment. Entry fee applies.
-Charco de La Laja (north coast): Natural seawater pool formed by volcanic lava. Great for swimming and snorkelling. Free.
+JARDÍN BOTÁNICO (Jardín de Aclimatación de La Orotava)
+One of the oldest botanical gardens in Spain, founded in 1788 by King Carlos III. Over 4,000 tropical and subtropical plant species. A must-visit.
+Address: Calle Retama 2, Puerto de la Cruz
+Entry: 3€ (tickets at the door only, no online booking)
+Hours: Daily 09:00–18:00. Closed 1 January, Good Friday and 25 December.
+How to get there: Bus line 363 stops right at the door. From the hostel ~15 min by bus, ~1€.
 
-=== SUNSET SPOTS ===
-Paseo Marítimo de Puerto de la Cruz (seafront near Playa Jardín): Spectacular sea views at sunset, bars and cafés nearby.
-Miradores along the coast at Punta Brava: Wide views of the Atlantic at dusk.
-Lago Martiánez: Popular sunset spot, colours reflected in the water.
+LAGO MARTIÁNEZ (Costa Martiánez complex)
+Spectacular seawater pool complex designed by César Manrique. 7 pools representing the 7 Canary Islands. Declared a Historic Garden of Cultural Interest. One of the best pool complexes in Europe.
+Address: Avenida Colón, Puerto de la Cruz (seafront)
+Entry: Adults 5.50€ / Children up to 10 years 2.50€. Sunlounger included. No food allowed inside. No towel rental available — bring your own.
+Hours: Winter (Oct–May) 10:00–18:00 / Summer (Jun–Sep) 10:00–19:00. Daily.
+How to get there: 10 min walk from the hostel along the seafront promenade.
 
-=== SHOPS NEARBY ===
-Minimarket Toni Manete: 50m away · Calle Dr. Fleming 4 · Mon–Sat 08:30–14:00, Sun 08:30–13:00
-Mini Market Bazar Magali: 50m · Calle Victor Machado 1 · Mon–Sun 09:00–21:00
-Minimarket César (fruit & veg): 100m · Calle Bencomo 10 · Mon–Sat 08:00–20:00, Sun 08:00–15:00
-Hiperdino Express Playa Jardín: 1000m · Av. Francisco Alfonso Carrillo 1 · Mon–Sun 08:00–22:00
-Padlocks for lockers: At the corner minimarket on the hostel's street.
-SIM cards & souvenirs: Puerto de la Cruz centre, around Plaza del Charco.
+LORO PARQUE
+One of the world's best zoos. Over 400 animal species including orcas, dolphins, sea lions, gorillas, tigers, jaguars and the world's largest parrot collection. All shows included in entry.
+Address: Avenida Loro Parque, Puerto de la Cruz
+Entry: Adults ~44€ / Children (3–11 years) ~32€. Book online in advance to avoid queues and get better prices: loroparque.com
+Hours: Daily 09:30–17:30
+How to get there: FREE mini-train (Loro Parque Express) departs from Plaza de los Reyes Católicos every 20 minutes, first train ~09:30, last return ~16:30. Also reachable by bus lines 102 and 381. Walking ~25–30 min from the hostel.
+Tip: Plan a full day — at least 5–6 hours. Arrive before 10:00 to avoid crowds.
 
-=== PHARMACY ===
-Farmacia de Armas Alonso: 150m · Calle Bencomo 6 · Mon–Fri 09:00–14:00 & 16:15–19:30, Sat 09:00–14:00, closed Sundays.
-Farmacia Plaza del Charco: Open until 22:00 (long hours).
-Farmacia Machado: Open until 22:00.
-Other pharmacies: Farmacia Etayo, Farmacia El Pozo, Pharmacy Botanico.
+TEIDE NATIONAL PARK & CABLE CAR
+The highest peak in Spain at 3,718m. UNESCO World Heritage Site. Spectacular lunar landscape, unique flora and fauna. One of the best stargazing spots on Earth.
+Entry to the park: FREE (driving or bus into the park is free)
+Cable car (Teleférico): Adults ~29€ / Children (3–13 years) ~14.50€. Book online in advance at volcanoteide.com — it sells out fast, especially in summer.
+Cable car hours: Generally 09:00–17:00 (last ascent 16:00). Check volcanoteide.com for exact times as they vary by season.
+Summit permit: To reach the very top (3,718m) you need a free permit from the national park — very limited places, book weeks in advance at tenerifeON.
+How to get there independently: Bus 348 from Puerto de la Cruz station at 09:30 → arrives Parador ~11:06. Return from Parador 16:00. ~6.20€ each way.
+Tip: Book cable car tickets online — it can be closed due to wind or weather. Check conditions before going.
 
-=== ATM / CASH ===
-CaixaBank ATM: Calle Bencomo 40 · 200m from hostel.
+BARRANCO DE MASCA
+One of the most spectacular gorges in the Canary Islands, inside the Parque Rural de Teno. A dramatic hike through volcanic ravines ending at a small beach. Can be done as descent only (one way) with boat transfer back to Los Gigantes.
+IMPORTANT — NEW RULES FROM APRIL 2025: Access to the hiking trail requires advance booking and a mandatory shuttle bus from Santiago del Teide.
+Entry (non-residents): 28€ adults / 14€ children + 10€ bus adults / 5€ bus children.
+Book at: caminobarrancodemasca.com
+Shuttle bus operates: Fri, Sat and Sun only. Departs Santiago del Teide 07:00–14:00 every 20 min.
+The village of Masca itself (without hiking the gorge) can still be visited freely.
+How to get there: Bus lines 355 or 365 to Santiago del Teide, then shuttle to Masca. Or take a taxi to Los Gigantes (~1h from Puerto de la Cruz) and join a boat tour.
+Difficulty: Medium. Requires good physical condition, hiking boots, minimum 2L water, sun protection.
 
-=== STATIONERY / LOTTERY ===
-Papelería y Lotería Hernández: Calle Bencomo 30 · Mon–Sat 09:30–13:00 & 17:00–19:00, closed Sundays.
+PLAYA JARDÍN
+Closest beach to the hostel. Black volcanic sand designed by César Manrique. 5 min walk. Entry: FREE. Lifeguards in high season.
 
-=== FOOD & DRINK RECOMMENDATIONS ===
-Budget / cheap:
-📍 Casa Canaria (Tasca): Calle Bencomo 3 (corner Beneharo). Good for breakfast and cheap meals.
-📍 Café Bar La Estrella: Calle Bencomo 28 · Tel +34 922 351 693. Tapas, sandwiches, simple dishes. Can adapt for vegetarians.
-📍 Bodega La Era: Calle Bencomo 56 · Tel +34 661 651 269. Tapas, meat, varied dishes ~10–20€. Popular with locals.
+LAGO MARTIÁNEZ natural pools (free alternative)
+The seafront area near San Telmo has free natural volcanic rock pools for swimming. Different from the paid Lago Martiánez complex.
 
-Traditional Canarian:
-📍 Mesón Los Gemelos: Calle El Peñón 4 · Tel +34 922 370 133. Open Mon/Thu–Sat 12:00–22:30, Sun 12:00–16:00 & 18:00–22:30. Closed Tue–Wed.
-📍 Guachinche El Aguacatero de Doña Chana: La Orotava · Tel +34 922 396 984.
+JARDÍN BOTÁNICO free alternative — HIJUELA DEL BOTÁNICO
+Small free botanical garden in La Orotava (nearby town). Hours 09:00–14:00 daily. Free entry.
 
-Vegetarian / Vegan:
-📍 El Limón: Vegetarian/vegan restaurant in Puerto de la Cruz.
+RAMBLA DE CASTRO
+Free scenic coastal hiking trail with panoramic Atlantic views. Easy, well-signposted. About 1.5–2 hours at a relaxed pace.
 
-Nightlife / bars:
-📍 Chingón: Calle Puerto Viejo 6. Mexican restaurant that transforms into a bar/small club with DJ on weekends and special events.
-📍 Blanco Bar: Calle Blanco 12. Bar and small club with dancefloor and music on weekend nights.
-Best nights: Thursday (start of nightlife), Friday and Saturday (busiest).
+ANAGA RURAL PARK (Laurel Forest)
+Ancient laurel forest over 10 million years old. UNESCO Biosphere Reserve. Free to visit and hike.
+How to get there: ~45 min by car or taxi. No direct bus from Puerto de la Cruz — easiest by taxi or organized tour.
 
-=== HEALTH & EMERGENCIES ===
-Emergency number: 112 (free, 24h, available in multiple languages — police, fire, ambulance, rescue)
-Ambulance: 061 or 112
-Police Nacional: 091 · Policía Local: 092 · Guardia Civil: 062
-
-Hospital with 24h emergency:
-📍 Hospiten Bellevue University Hospital · Calle Alemania, Puerto de la Cruz · Tel +34 922 383 551
-
-Medical centres:
-📍 Doctors Puerto de la Cruz: C. de Santo Domingo 21 · Tel +34 922 973 481
-📍 Centro Médico Quirónsalud Vida: Ctra. General Puerto Cruz–Arenas 73 · Tel +34 922 382 317
-📍 Toucan Medical Center: Tel +34 922 376 344
-📍 Health Center Casco Botanical (public, primary care): Tel +34 922 478 208
-
-=== ACTIVITIES NEAR THE HOSTEL ===
-Free:
-🏖 Playa Jardín: 5 min walk · Black volcanic sand · Free swimming
-🌊 Playa Bollullo: 30 min by bus · Natural secluded beach
-🏘 La Ranilla (old quarter): 10 min walk · Local bars, cafés, street art
-🌳 Plaza del Charco: City centre, harbour · Free
-🌺 Jardín Botánico: 15 min by bus · Historic botanical gardens
-🏔 Valle de La Orotava: 45 min by bus · Stunning valley views
-🏡 La Orotava village: Nearby historic town
-🌲 Rambla de Castro: Scenic coastal trail with Atlantic views · Easy, well-signposted · Free
-🗻 Mirador del Montañero: Free viewpoint · Amazing panoramic views
-🌊 Charco de La Laja: Natural volcanic pool · Free · Great for snorkelling
-🌅 Paseo Marítimo at sunset: Free, spectacular
-🎨 Saturday artisan market: Every Saturday near Plaza del Charco · Free to browse
-🦜 Loro Parque: 20 min walk or bus · Famous animal & plant park (entry fee)
-
-Paid activities (Nest Experiences):
-🌌 Stargazing on Teide: One of the world's best stargazing spots. Souvenir photo included. Pickup: Ashavana, Medano, Los Amigos, Duque Nest. Contact Claudio for price and dates: +39 329 409 6754
-🌋 Teide National Park (every Wednesday): Real volcano, Canarian coffee, hiking, sunset at 2,000m. Free pickup at the hostel. Contact Claudio: +39 329 409 6754
-🌿 Anaga Full Day: Guided hike through ancient laurel forest with ocean viewpoints. Easy/medium. Pickup included. Contact Alessio: +39 339 188 6061
-🌊 Malpaís de Güímar: Volcanic cones where lava meets the ocean. Half day. 20€. Pickup from Las Eras. Contact Alessio: +39 339 188 6061
-🧗 Rock Climbing: No experience needed. Contact: +34 613 356 187
-🦜 Loro Parque: Ask reception for directions and transport options.
-
-How to reach Teide independently (bus):
-Line 348 from Puerto de la Cruz station at 09:30 → Parador ~11:06.
-Return: Parador 16:00 → Puerto de la Cruz ~17:40. ~6.20€ each way.
+=== IMPORTANT RULE FOR RESPONDING ABOUT PLACES ===
+When a guest asks about any specific place or attraction, always include:
+📍 A brief description of what it is (1–2 sentences)
+🚌 How to get there from the hostel (transport + time)
+💰 Entry price (if applicable)
+🕐 Opening hours (if known)
+✨ One practical tip
+Never give a response shorter than 4 lines about a specific attraction.
 
 === HOSTEL ACTIVITIES (organised by the hostel) ===
 The hostel organises activities especially on Thursdays, Fridays, Saturdays and Sundays. Check the board at reception for today's programme.
