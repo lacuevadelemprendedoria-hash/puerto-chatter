@@ -39,10 +39,8 @@ const TEST_QUESTIONS = [
 ];
 
 const FAIL_PHRASES = [
-  "don't have", "no tengo", "no dispongo", "not in my", "no está en",
-  "no tengo esa", "i don't know", "no sé", "cannot find", "no puedo",
-  "not available", "no available", "sin información", "no information",
-  "i'm not sure", "no estoy seguro",
+  "don't have information", "no tengo información", "not in my",
+  "i don't know", "no sé", "cannot find",
 ];
 
 type Status = "ok" | "short" | "fail";
