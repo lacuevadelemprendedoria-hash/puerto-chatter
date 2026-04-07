@@ -268,7 +268,7 @@ export function FeedEditor({ isOpen, onClose, onSaved, itemId }: FeedEditorProps
                   This calendar item will only show during the selected month.
                 </p>
               </div>
-            )
+            )}
             <div className="grid grid-cols-2 gap-3">
               <div className="space-y-1.5">
                 <Label>Show from (optional)</Label>
