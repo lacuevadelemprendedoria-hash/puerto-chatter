@@ -14,7 +14,7 @@ import {
 import { Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
-type FeedItemType = "event" | "restaurant" | "hostel_activity" | "banner" | "curiosity";
+type FeedItemType = "event" | "restaurant" | "hostel_activity" | "banner" | "curiosity" | "calendar";
 
 interface FeedItem {
   id?: string;
@@ -34,6 +34,7 @@ interface FeedItem {
   is_active: boolean;
   sort_order: number;
   day_of_week: number | null;
+  month: number | null;
 }
 
 const EMPTY: FeedItem = {
@@ -48,6 +49,7 @@ const EMPTY: FeedItem = {
   is_active: true,
   sort_order: 0,
   day_of_week: null,
+  month: null,
 };
 
 interface FeedEditorProps {
@@ -124,6 +126,7 @@ export function FeedEditor({ isOpen, onClose, onSaved, itemId }: FeedEditorProps
     hostel_activity: "🏠 Hostel Activity",
     banner: "📢 Banner / Announcement",
     curiosity: "🌴 Curiosity / Did you know?",
+    calendar: "📅 Monthly Calendar",
   };
 
   return (
