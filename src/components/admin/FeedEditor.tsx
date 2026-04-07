@@ -14,7 +14,7 @@ import {
 import { Loader2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
-type FeedItemType = "event" | "restaurant" | "hostel_activity" | "banner" | "curiosity";
+type FeedItemType = "event" | "restaurant" | "hostel_activity" | "banner" | "curiosity" | "calendar";
 
 interface FeedItem {
   id?: string;
@@ -34,6 +34,7 @@ interface FeedItem {
   is_active: boolean;
   sort_order: number;
   day_of_week: number | null;
+  month: number | null;
 }
 
 const EMPTY: FeedItem = {
@@ -48,6 +49,7 @@ const EMPTY: FeedItem = {
   is_active: true,
   sort_order: 0,
   day_of_week: null,
+  month: null,
 };
 
 interface FeedEditorProps {
@@ -124,6 +126,7 @@ export function FeedEditor({ isOpen, onClose, onSaved, itemId }: FeedEditorProps
     hostel_activity: "🏠 Hostel Activity",
     banner: "📢 Banner / Announcement",
     curiosity: "🌴 Curiosity / Did you know?",
+    calendar: "📅 Monthly Calendar",
   };
 
   return (
@@ -234,6 +237,35 @@ export function FeedEditor({ isOpen, onClose, onSaved, itemId }: FeedEditorProps
                 </Select>
                 <p className="text-xs text-muted-foreground">
                   This curiosity will only show on the selected day.
+                </p>
+              </div>
+            )}
+            {form.type === "calendar" && (
+              <div className="space-y-1.5">
+                <Label>Month</Label>
+                <Select value={form.month !== null ? String(form.month) : ""} onValueChange={(v) => set("month", parseInt(v))}>
+                  <SelectTrigger><SelectValue placeholder="Select month..." /></SelectTrigger>
+                  <SelectContent>
+                    {[
+                      { value: "1", label: "January / Enero" },
+                      { value: "2", label: "February / Febrero" },
+                      { value: "3", label: "March / Marzo" },
+                      { value: "4", label: "April / Abril" },
+                      { value: "5", label: "May / Mayo" },
+                      { value: "6", label: "June / Junio" },
+                      { value: "7", label: "July / Julio" },
+                      { value: "8", label: "August / Agosto" },
+                      { value: "9", label: "September / Septiembre" },
+                      { value: "10", label: "October / Octubre" },
+                      { value: "11", label: "November / Noviembre" },
+                      { value: "12", label: "December / Diciembre" },
+                    ].map((m) => (
+                      <SelectItem key={m.value} value={m.value}>{m.label}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <p className="text-xs text-muted-foreground">
+                  This calendar item will only show during the selected month.
                 </p>
               </div>
             )}
