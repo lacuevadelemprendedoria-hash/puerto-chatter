@@ -110,6 +110,9 @@ Uber / Cabify: Does not work well in the area. Use taxi instead.
 Car rental: Recommended for excursions (Teide, beaches, nature routes), flexible travel, groups or guests with luggage. Public transport works but frequencies can be limited.
 Bus info: Check titsa.com for all routes and timetables across Tenerife.
 
+=== NEARBY SERVICES ===
+Farmacia de Armas Alonso: 150m away · Calle Bencomo 6 · Monday to Friday 09:00–14:00 and 16:15–19:30 · Saturday 09:00–14:00 · Closed Sundays.
+
 === PLACES & ACTIVITIES — VERIFIED INFORMATION ===
 
 JARDÍN BOTÁNICO (Jardín de Aclimatación de La Orotava)
