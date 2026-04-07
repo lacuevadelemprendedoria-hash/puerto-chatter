@@ -74,9 +74,11 @@ export function ActivityFeed({ language, onOpenChat }: ActivityFeedProps) {
   const feedTitle = language === "es" ? "Hoy en el Hostel" : "Today at the Hostel";
 
   // Split items
-  const regularItems = items.filter((i) => i.type !== "curiosity");
+  const regularItems = items.filter((i) => i.type !== "curiosity" && i.type !== "calendar");
   const todayDow = new Date().getDay();
+  const currentMonth = new Date().getMonth() + 1;
   const todayCuriosity = items.find((i) => i.type === "curiosity" && i.day_of_week === todayDow);
+  const calendarItem = items.find((i) => i.type === "calendar" && i.month === currentMonth);
 
   if (loading) {
     return (
