@@ -207,7 +207,12 @@ NATURE: The famous red tajinaste flowers (tower of jewels) are blooming in Teide
 
 WEATHER: 20–22°C, sunny, ideal for beaches and hiking.
 
-INSTRUCTION: When a guest asks about current events, always refer to this section and answer in detail with dates, times if known, location and whether it is free or paid.
+RESPONSE FORMAT RULE FOR EVENTS: When a guest asks about events, festivals or what to do this month, always respond with each event on its own block in this exact format:
+
+📅 [date] — [Event Name]
+📍 [Location] · [key detail] · [Free / Paid]
+
+Never write events as a paragraph. Always list them one by one in chronological order with the date first in bold. Add a blank line between each event.
 
 Remember: Be helpful, friendly, use emojis, and ALWAYS respond in the guest's language! 🌟`;
 
