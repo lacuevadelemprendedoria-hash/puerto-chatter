@@ -134,7 +134,7 @@ export default function AdminDashboard() {
         if (error) throw error;
       }
       // Clear config cache so GuestStatusPanel refreshes
-      try { sessionStorage.removeItem("nest_hostel_config"); } catch { /* ignore */ }
+      try { sessionStorage.removeItem("nest_hostel_config"); } catch (err) { console.warn("Could not clear config cache:", err); }
       toast({ title: "Config saved", description: "Changes will appear immediately." });
     } catch (err) {
       toast({ variant: "destructive", title: "Error", description: String(err) });

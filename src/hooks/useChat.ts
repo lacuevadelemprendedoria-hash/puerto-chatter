@@ -27,11 +27,17 @@ function loadMessages(): ChatMessage[] {
 function saveMessages(messages: ChatMessage[]) {
   try {
     sessionStorage.setItem(SESSION_KEY, JSON.stringify(messages));
-  } catch { /* ignore */ }
+  } catch (err) {
+    console.warn("Could not persist chat history:", err);
+  }
 }
 
 function clearStoredMessages() {
-  try { sessionStorage.removeItem(SESSION_KEY); } catch { /* ignore */ }
+  try {
+    sessionStorage.removeItem(SESSION_KEY);
+  } catch (err) {
+    console.warn("Could not clear chat history:", err);
+  }
 }
 
 // ── Hook ──────────────────────────────────────────────────────────────────────
@@ -140,7 +146,7 @@ export function useChat(language: Language) {
                 )
               );
             }
-          } catch {
+          } catch (_parseErr) {
             textBuffer = line + "\n" + textBuffer;
             break;
           }
@@ -166,8 +172,8 @@ export function useChat(language: Language) {
                 )
               );
             }
-          } catch {
-            /* ignore */
+          } catch (_parseErr) {
+            /* malformed SSE line in flush buffer — safe to skip */
           }
         }
       }
