@@ -281,10 +281,23 @@ export function ActivityFeed({ language, onOpenChat }: ActivityFeedProps) {
 
               {isOpen && (
                 <div className="px-4 pb-4 border-t animate-fade-in" style={{ borderColor: '#2563EB33' }}>
-                  <div className="pt-3 space-y-1">
-                    {description.split("\n").map((line, i) => (
-                      <p key={i} className="text-sm text-muted-foreground">{line}</p>
-                    ))}
+                  <div className="pt-3">
+                    {description.split("\n\n").map((block, i, arr) => {
+                      const lines = block.split("\n");
+                      const heading = lines[0];
+                      const rest = lines.slice(1);
+                      return (
+                        <div key={i}>
+                          <p className="font-semibold text-foreground" style={{ fontSize: '0.9rem' }}>{heading}</p>
+                          {rest.map((line, j) => (
+                            <p key={j} className="text-xs mt-0.5" style={{ color: '#555' }}>{line}</p>
+                          ))}
+                          {i < arr.length - 1 && (
+                            <hr className="my-3" style={{ border: 'none', borderTop: '1px solid #D0E8F0' }} />
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                   {ctaLabel && (
                     <button
