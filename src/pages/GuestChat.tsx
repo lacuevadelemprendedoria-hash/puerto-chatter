@@ -7,6 +7,7 @@ import { QuickActionsBar } from "@/components/assistant/QuickActionsBar";
 import { GuidedFlow } from "@/components/assistant/GuidedFlow";
 import { ActivityFeed } from "@/components/assistant/ActivityFeed";
 import { ChatPanel } from "@/components/assistant/ChatPanel";
+import { ActivityMap } from "@/components/map/ActivityMap";
 import { useChat } from "@/hooks/useChat";
 import { Language, useTranslations } from "@/lib/i18n";
 import { FlowId } from "@/lib/flows";
@@ -28,6 +29,7 @@ export default function GuestChat() {
   const [activeFlow, setActiveFlow] = useState<FlowId | null>(null);
   const [chatOpen, setChatOpen] = useState(false);
   const [pendingQuery, setPendingQuery] = useState<string | null>(null);
+  const [mapOpen, setMapOpen] = useState(false);
 
   const handleSelectLanguage = (lang: Language) => {
     setLanguage(lang);
@@ -93,6 +95,30 @@ export default function GuestChat() {
       <div className="flex-1 overflow-y-auto scrollbar-hide">
         <GuestStatusPanel t={t} language={language} onQuickHelp={() => setActiveFlow("needHelp")} />
         <QuickActionsBar t={t} onAction={(flowId) => setActiveFlow(flowId)} />
+
+        {/* Map explore button */}
+        <div className="px-4 pb-2">
+          <button
+            onClick={() => setMapOpen(true)}
+            className="w-full flex items-center gap-3 rounded-2xl border border-border bg-card p-4 hover:border-[#53CED1]/50 hover:shadow-sm active:scale-95 transition-all duration-150"
+          >
+            <div className="rounded-xl p-2.5 text-xl bg-[#53CED1]/15">
+              <span>🗺️</span>
+            </div>
+            <div className="text-left">
+              <p className="text-sm font-semibold text-[#0D6F82] font-body">
+                {language === "es" ? "Explorar la zona" : "Explore the area"}
+              </p>
+              <p className="text-xs text-muted-foreground mt-0.5 font-body">
+                {language === "es"
+                  ? "Playas, restaurantes, atracciones…"
+                  : "Beaches, restaurants, attractions…"}
+              </p>
+            </div>
+            <span className="ml-auto text-lg">→</span>
+          </button>
+        </div>
+
         <ActivityFeed language={language} onOpenChat={handleOpenChat} />
       </div>
 
@@ -122,6 +148,13 @@ export default function GuestChat() {
         onSend={sendMessage}
         t={t}
         language={language}
+      />
+
+      <ActivityMap
+        open={mapOpen}
+        onClose={() => setMapOpen(false)}
+        language={language}
+        onOpenChat={handleOpenChat}
       />
     </div>
   );
