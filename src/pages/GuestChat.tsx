@@ -6,6 +6,7 @@ import { GuestStatusPanel } from "@/components/assistant/GuestStatusPanel";
 import { QuickActionsBar } from "@/components/assistant/QuickActionsBar";
 import { GuidedFlow } from "@/components/assistant/GuidedFlow";
 import { ActivityFeed } from "@/components/assistant/ActivityFeed";
+import { NeighborhoodMap } from "@/components/assistant/NeighborhoodMap";
 import { ChatPanel } from "@/components/assistant/ChatPanel";
 import { useChat } from "@/hooks/useChat";
 import { Language, useTranslations } from "@/lib/i18n";
@@ -93,6 +94,7 @@ export default function GuestChat() {
       <div className="flex-1 overflow-y-auto scrollbar-hide">
         <GuestStatusPanel t={t} language={language} onQuickHelp={() => setActiveFlow("needHelp")} />
         <QuickActionsBar t={t} onAction={(flowId) => setActiveFlow(flowId)} />
+        <NeighborhoodMap language={language} />
         <ActivityFeed language={language} onOpenChat={handleOpenChat} />
       </div>
 
