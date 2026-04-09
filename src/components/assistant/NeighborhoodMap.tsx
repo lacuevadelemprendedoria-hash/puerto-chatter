@@ -22,8 +22,8 @@ const LOCATIONS: MapLocation[] = [
     es: "Puerto Nest Hostel",
     distanceEn: "You are here",
     distanceEs: "Estás aquí",
-    lat: 28.4168,
-    lng: -16.5558,
+    lat: 28.4107,
+    lng: -16.5655,
     isHostel: true,
   },
   {
@@ -53,8 +53,8 @@ const LOCATIONS: MapLocation[] = [
     es: "Loro Parque",
     distanceEn: "25 min walk",
     distanceEs: "25 min a pie",
-    lat: 28.4084,
-    lng: -16.5642,
+    lat: 28.4086,
+    lng: -16.5643,
   },
   {
     id: "plaza_charco",
@@ -81,9 +81,9 @@ const LOCATIONS: MapLocation[] = [
 // OSM iframe centred on Puerto de la Cruz, marker on hostel
 const MAP_EMBED_URL =
   "https://www.openstreetmap.org/export/embed.html" +
-  "?bbox=-16.5780%2C28.3950%2C-16.5200%2C28.4280" +
+  "?bbox=-16.5800%2C28.3950%2C-16.5200%2C28.4250" +
   "&layer=mapnik" +
-  "&marker=28.4168%2C-16.5558";
+  "&marker=28.4107%2C-16.5655";
 
 interface NeighborhoodMapProps {
   language: Language;
@@ -108,7 +108,7 @@ export function NeighborhoodMap({ language }: NeighborhoodMapProps) {
           {isEs ? "Mapa del Barrio" : "Neighbourhood Map"}
         </h2>
         <a
-          href="https://www.openstreetmap.org/#map=15/28.4168/-16.5558"
+          href="https://www.openstreetmap.org/#map=15/28.4107/-16.5655"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-1 text-xs font-semibold text-primary"

@@ -178,8 +178,8 @@ export const MAP_POINTS: MapPoint[] = [
     name_es: "Rambla de Castro",
     desc_en: "Scenic coastal trail through banana plantations and volcanic cliffs. ~35 min walk.",
     desc_es: "Sendero costero entre plataneras y acantilados volcánicos. ~35 min caminando.",
-    lat: 28.3950,
-    lng: -16.5700,
+    lat: 28.3966,
+    lng: -16.5922,
     walkMin: 35,
   },
 
