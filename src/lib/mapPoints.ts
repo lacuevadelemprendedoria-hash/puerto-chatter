@@ -41,8 +41,8 @@ export const MAP_POINTS: MapPoint[] = [
     name_es: "Puerto Nest Hostel",
     desc_en: "You are here! Check-in 14:00 · Check-out 11:00",
     desc_es: "¡Estás aquí! Check-in 14:00 · Check-out 11:00",
-    lat: 28.4168,
-    lng: -16.5558,
+    lat: 28.4107,
+    lng: -16.5655,
   },
 
   // ── Beaches ─────────────────────────────────────────────────
@@ -54,8 +54,8 @@ export const MAP_POINTS: MapPoint[] = [
     name_es: "Playa Jardín",
     desc_en: "Black volcanic sand beach surrounded by lush gardens. ~10 min walk.",
     desc_es: "Playa de arena volcánica negra rodeada de jardines. ~10 min caminando.",
-    lat: 28.4149,
-    lng: -16.5547,
+    lat: 28.4126,
+    lng: -16.5598,
     walkMin: 10,
   },
   {
@@ -78,8 +78,8 @@ export const MAP_POINTS: MapPoint[] = [
     name_es: "Playa del Bollullo",
     desc_en: "Wild black sand beach off the beaten path. ~30 min by bus.",
     desc_es: "Playa virgen de arena negra, fuera de las rutas turísticas. ~30 min en bus.",
-    lat: 28.4025,
-    lng: -16.5155,
+    lat: 28.4178,
+    lng: -16.5201,
   },
 
   // ── Culture ─────────────────────────────────────────────────
