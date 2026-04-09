@@ -65,7 +65,7 @@ export function ActivityMap({ open, onClose, language, onOpenChat }: ActivityMap
     const timer = setTimeout(() => {
       if (!mapRef.current || mapInstance.current) return;
       const map = L.map(mapRef.current, {
-        center: [28.4168, -16.5558],
+        center: [28.4107, -16.5655],
         zoom: 14,
         zoomControl: true,
         attributionControl: false,
