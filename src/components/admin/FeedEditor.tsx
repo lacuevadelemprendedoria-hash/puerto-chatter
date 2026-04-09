@@ -80,6 +80,14 @@ export function FeedEditor({ isOpen, onClose, onSaved, itemId }: FeedEditorProps
             setForm({
               ...EMPTY,
               ...data,
+              emoji: data.emoji || "📌",
+              subtitle_en: data.subtitle_en || "",
+              subtitle_es: data.subtitle_es || "",
+              description_en: data.description_en || "",
+              description_es: data.description_es || "",
+              cta_label_en: data.cta_label_en || "",
+              cta_label_es: data.cta_label_es || "",
+              cta_action: data.cta_action || "",
               starts_at: data.starts_at ? data.starts_at.slice(0, 16) : "",
               ends_at:   data.ends_at   ? data.ends_at.slice(0, 16)   : "",
             });
