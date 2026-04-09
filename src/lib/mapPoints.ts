@@ -41,8 +41,8 @@ export const MAP_POINTS: MapPoint[] = [
     name_es: "Puerto Nest Hostel",
     desc_en: "You are here! Check-in 14:00 · Check-out 11:00",
     desc_es: "¡Estás aquí! Check-in 14:00 · Check-out 11:00",
-    lat: 28.4138,
-    lng: -16.5497,
+    lat: 28.4168,
+    lng: -16.5558,
   },
 
   // ── Beaches ─────────────────────────────────────────────────
@@ -78,8 +78,8 @@ export const MAP_POINTS: MapPoint[] = [
     name_es: "Playa del Bollullo",
     desc_en: "Wild black sand beach off the beaten path. ~30 min by bus.",
     desc_es: "Playa virgen de arena negra, fuera de las rutas turísticas. ~30 min en bus.",
-    lat: 28.4290,
-    lng: -16.5700,
+    lat: 28.4025,
+    lng: -16.5155,
   },
 
   // ── Culture ─────────────────────────────────────────────────
@@ -126,8 +126,8 @@ export const MAP_POINTS: MapPoint[] = [
     name_es: "Castillo San Felipe",
     desc_en: "17th-century coastal fortress with dramatic ocean views. ~12 min walk.",
     desc_es: "Fortaleza costera del siglo XVII con vistas impresionantes. ~12 min caminando.",
-    lat: 28.4160,
-    lng: -16.5490,
+    lat: 28.4143,
+    lng: -16.5582,
     walkMin: 12,
   },
 
@@ -178,8 +178,8 @@ export const MAP_POINTS: MapPoint[] = [
     name_es: "Rambla de Castro",
     desc_en: "Scenic coastal trail through banana plantations and volcanic cliffs. ~35 min walk.",
     desc_es: "Sendero costero entre plataneras y acantilados volcánicos. ~35 min caminando.",
-    lat: 28.4291,
-    lng: -16.5604,
+    lat: 28.3950,
+    lng: -16.5700,
     walkMin: 35,
   },
 
@@ -192,8 +192,8 @@ export const MAP_POINTS: MapPoint[] = [
     name_es: "Loro Parque",
     desc_en: "World-famous zoo: orcas, gorillas, tigers and 3,000 parrots. ~15 min by bus.",
     desc_es: "Zoo de fama mundial: orcas, gorilas, tigres y 3.000 loros. ~15 min en bus.",
-    lat: 28.4197,
-    lng: -16.5609,
+    lat: 28.4084,
+    lng: -16.5642,
   },
   {
     id: "siam_park",

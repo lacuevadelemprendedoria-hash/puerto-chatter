@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardHeader, CardTitle } from "@/components/ui/card";
 import { Loader2, Edit2, Trash2 } from "lucide-react";
 import {
   AlertDialog,
@@ -22,8 +22,8 @@ interface ContentItem {
   id: string;
   title: string;
   content: string;
-  sort_order: number;
-  is_active: boolean;
+  sort_order: number | null;
+  is_active: boolean | null;
 }
 
 interface ContentListProps {

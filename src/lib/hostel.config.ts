@@ -19,8 +19,8 @@ export const HOSTEL_CONFIG = {
   country: "Spain",
 
   // ── Coordinates for weather widget (Puerto de la Cruz) ───────
-  latitude: 28.4127,
-  longitude: -16.5496,
+  latitude: 28.4168,
+  longitude: -16.5558,
 
   // ── Contact ───────────────────────────────────────────────────
   receptionPhone: "+34 656 36 80 39",

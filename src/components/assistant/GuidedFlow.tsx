@@ -292,10 +292,10 @@ function ResultsContent({
 }
 
 function EventsContent({
-  t,
+  t: _t,
   language,
-  onOpenChat,
-  onClose,
+  onOpenChat: _onOpenChat,
+  onClose: _onClose,
 }: {
   t: Translations;
   language: Language;

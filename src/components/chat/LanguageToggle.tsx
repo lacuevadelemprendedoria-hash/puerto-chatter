@@ -8,7 +8,7 @@ interface LanguageToggleProps {
   label: string;
 }
 
-export function LanguageToggle({ language, onToggle, label }: LanguageToggleProps) {
+export function LanguageToggle({ language: _language, onToggle, label }: LanguageToggleProps) {
   return (
     <Button
       variant="ghost"
