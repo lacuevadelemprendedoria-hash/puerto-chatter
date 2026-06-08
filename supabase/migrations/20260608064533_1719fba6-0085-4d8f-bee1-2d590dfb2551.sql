@@ -1,0 +1,1 @@
+DROP POLICY IF EXISTS "Anyone can update analytics_daily" ON public.analytics_daily; DROP POLICY IF EXISTS "Anyone can insert analytics_daily" ON public.analytics_daily; REVOKE INSERT, UPDATE ON public.analytics_daily FROM anon, authenticated;

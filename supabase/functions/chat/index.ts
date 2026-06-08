@@ -296,7 +296,15 @@ serve(async (req) => {
     // Gateway returns OpenAI-compatible SSE — pass through directly
     return new Response(response.body, { headers: { ...corsHeaders, "Content-Type": "text/event-stream" } });
   } catch (error) {
-    console.error("Chat error:", error);
-    return new Response(JSON.stringify({ error: error instanceof Error ? error.message : "Unknown error" }), { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } });
+    // Server-side log only — do not return error details to clients
+    console.error(JSON.stringify({
+      context: "chat_handler",
+      type: error instanceof Error ? error.constructor.name : typeof error,
+      timestamp: new Date().toISOString(),
+    }));
+    return new Response(
+      JSON.stringify({ error: "We're unable to process your request right now. Please try again." }),
+      { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+    );
   }
 });
