@@ -117,7 +117,18 @@ export default function GuestChat() {
             </div>
             <span className="ml-auto text-lg">→</span>
           </button>
-        </div>
+      {/* DG ESTUDIO footer */}
+      <footer className="shrink-0 border-t border-border bg-card py-3 text-center">
+        <a
+          href="https://dgestudio.app"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-[11px] font-medium text-muted-foreground hover:text-primary transition-colors"
+        >
+          {language === "es" ? "Creado por DG ESTUDIO" : "Created by DG ESTUDIO"}
+        </a>
+      </footer>
+    </div>
 
         <ActivityFeed language={language} onOpenChat={handleOpenChat} />
       </div>
