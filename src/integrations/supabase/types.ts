@@ -293,6 +293,7 @@ export type Database = {
         Returns: undefined
       }
       is_admin: { Args: { _user_id: string }; Returns: boolean }
+      track_visitor: { Args: { _visitor_id: string }; Returns: undefined }
     }
     Enums: {
       content_category:
