@@ -120,19 +120,6 @@ export default function GuestChat() {
         </div>
 
         <ActivityFeed language={language} onOpenChat={handleOpenChat} />
-
-        {/* DG ESTUDIO credit */}
-        <div className="px-4 pt-3 pb-6 text-center">
-          <a
-            href="https://dgestudio.app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 text-[11px] text-muted-foreground hover:text-[#0D6F82] transition-colors"
-          >
-            <span>{language === "es" ? "Creado por" : "Created by"}</span>
-            <span className="font-semibold tracking-wide">DG ESTUDIO</span>
-          </a>
-        </div>
       </div>
 
       {/* Floating chat button */}
